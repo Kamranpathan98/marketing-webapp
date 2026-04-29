@@ -140,10 +140,10 @@ export default function DemoInvoice({ onSave, onReset }: DemoInvoiceProps) {
     if (onReset) onReset();
   }, [onReset]);
 
-  // F2 Shortcut listener
+  // Ctrl+S Shortcut listener
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'F2') {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
         handleSave();
       }
@@ -252,7 +252,7 @@ export default function DemoInvoice({ onSave, onReset }: DemoInvoiceProps) {
               className="h-11 px-8 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-all flex items-center gap-2 group"
             >
               <span>Save Invoice</span>
-              <kbd className="text-[10px] bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-500 group-hover:text-zinc-300 transition-colors">F2</kbd>
+              <kbd className="text-[10px] bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-500 group-hover:text-zinc-300 transition-colors">Ctrl+S</kbd>
             </button>
           </div>
 

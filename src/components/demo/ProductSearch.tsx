@@ -30,6 +30,7 @@ export default function ProductSearch({
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const blurTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const performSearch = useCallback((q: string) => {
     const searchResults = searchProducts(q);
@@ -48,8 +49,6 @@ export default function ProductSearch({
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults([]);
-      setIsOpen(false);
       return;
     }
 
@@ -69,15 +68,17 @@ export default function ProductSearch({
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      // Logic for showing all products when empty and arrow down pressed
-      if (!isOpen && !query) {
+      // If empty and no results yet, show all products
+      if (!query && results.length === 0) {
         setResults(DEMO_PRODUCTS.slice(0, 10));
         setHighlightedIndex(0);
         setIsOpen(true);
         if (isFirstOpen) onFirstDropdownOpen();
         return;
       }
+      
       if (results.length > 0) {
+        if (!isOpen) setIsOpen(true);
         setHighlightedIndex((prev) => (prev + 1) % results.length);
       }
     } else if (e.key === 'ArrowUp') {
@@ -113,10 +114,6 @@ export default function ProductSearch({
     }
   };
 
-  const handleBlur = () => {
-    // 150ms delay to allow clicks to register before closing
-    setTimeout(() => setIsOpen(false), 150);
-  };
 
   return (
     <div className="relative w-full">
@@ -134,11 +131,32 @@ export default function ProductSearch({
           type="text"
           disabled={disabled}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            const val = e.target.value;
+            setQuery(val);
+            if (!val.trim()) {
+              setResults(DEMO_PRODUCTS.slice(0, 10));
+              setHighlightedIndex(0);
+            }
+            // Always ensure dropdown is open when user is actively typing
+            setIsOpen(true);
+          }}
           onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
+          onBlur={() => {
+            // Store the timeout so we can cancel it if focus is regained
+            blurTimeout.current = setTimeout(() => setIsOpen(false), 150);
+          }}
           onFocus={() => {
-            if (query.trim()) {
+            // Cancel any pending blur close
+            if (blurTimeout.current) clearTimeout(blurTimeout.current);
+
+            // Show all products on focus if empty, to encourage selection
+            if (!query.trim()) {
+              setResults(DEMO_PRODUCTS.slice(0, 10));
+              setHighlightedIndex(0);
+              setIsOpen(true);
+              if (isFirstOpen) onFirstDropdownOpen();
+            } else {
               setResults(searchProducts(query));
               setIsOpen(true);
             }

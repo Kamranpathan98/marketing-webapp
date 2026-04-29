@@ -1,7 +1,7 @@
 # P1-T6 — InvoiceTimer with Start Flash
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4 (timer state lives in DemoInvoice)
 
@@ -76,19 +76,19 @@ useInvoiceTimer hook (lives in DemoInvoice or as a hook file):
 
 ## Acceptance Criteria
 
-- [ ] setInterval is in DemoInvoice or useInvoiceTimer hook — NOT inside InvoiceTimer component
-- [ ] Timer starts on first keystroke in CustomerField or ProductSearch (whichever comes first)
-- [ ] Timer interval is 50ms
-- [ ] Timer stops (clearInterval called) exactly when SAVE action fires
-- [ ] Timer clears on RESET action
-- [ ] useEffect cleanup function calls clearInterval — no memory leak
-- [ ] Display format: "X.Xs" for < 10 seconds, "XX.Xs" for ≥ 10 seconds
-- [ ] Idle state: muted zinc-600 color
-- [ ] Running state: amber-400 color
-- [ ] Saved state: green-400 color, bold
-- [ ] "⚡ Timer started" flash appears when timer starts
-- [ ] Flash duration is ~800ms total (fade in + hold + fade out)
-- [ ] Flash uses CSS animation (not JS setTimeout for the animation itself)
-- [ ] After flash completes, flash element is not in the DOM
-- [ ] justStarted is a ref (not state) — verified by confirming it does not cause a re-render
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] setInterval is in DemoInvoice or useInvoiceTimer hook — NOT inside InvoiceTimer component
+- [x] Timer starts on first keystroke in CustomerField or ProductSearch (whichever comes first)
+- [x] Timer interval is 50ms
+- [x] Timer stops (clearInterval called) exactly when SAVE action fires
+- [x] Timer clears on RESET action
+- [x] useEffect cleanup function calls clearInterval — no memory leak
+- [x] Display format: "X.Xs" for < 10 seconds, "XX.Xs" for ≥ 10 seconds
+- [x] Idle state: muted zinc-600 color
+- [x] Running state: amber-400 color
+- [x] Saved state: green-400 color, bold
+- [x] "⚡ Timer started" flash appears when timer starts
+- [x] Flash duration is ~800ms total (fade in + hold + fade out)
+- [x] Flash uses CSS animation (not JS setTimeout for the animation itself)
+- [x] After flash completes, flash element is not in the DOM
+- [x] justStarted is a ref (not state) — verified by confirming it does not cause a re-render
+- [x] `npx tsc --noEmit` passes with 0 errors

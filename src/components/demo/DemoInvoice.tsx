@@ -16,6 +16,9 @@ const initialState: InvoiceState = {
   firstDropdownOpened: false,
 };
 
+import InvoiceTimer from './InvoiceTimer';
+import { useInvoiceTimer } from '@/hooks/useInvoiceTimer';
+
 function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceState {
   switch (action.type) {
     case 'SET_CUSTOMER':
@@ -32,12 +35,10 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
       let newItems;
 
       if (existingItemIndex > -1) {
-        // Increment quantity of existing item
         newItems = state.items.map((item, idx) => 
           idx === existingItemIndex ? { ...item, qty: item.qty + 1 } : item
         );
       } else {
-        // Add new item
         newItems = [...state.items, { product: action.payload.product, qty: 1, imei: '' }];
       }
 
@@ -45,7 +46,9 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
         ...state,
         items: newItems,
         hasInteracted: true,
-        firstDropdownOpened: true, // Auto-mark as opened when item is added
+        startTime: state.startTime || Date.now(), // Capture start time on first add
+        status: state.status === 'idle' ? 'active' : state.status,
+        firstDropdownOpened: true,
       };
     }
 
@@ -108,6 +111,11 @@ export default function DemoInvoice() {
   const [focusedField, setFocusedField] = React.useState<string>('customer');
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  const { elapsedMs, justStarted } = useInvoiceTimer({ 
+    status: state.status, 
+    startTime: state.startTime 
+  });
+
   // Derived Values - Computed in render, never stored in state
   const subtotal = state.items.reduce((sum, item) => sum + item.product.price * item.qty, 0);
   const gstTotal = state.items.reduce((sum, item) => sum + calcGST(item.product.price * item.qty, item.product.gst), 0);
@@ -156,7 +164,11 @@ export default function DemoInvoice() {
           </div>
           <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest">New Invoice #8843</span>
         </div>
-        <div className="text-amber-500 font-mono text-sm font-bold">0.0s</div>
+        <InvoiceTimer 
+          elapsedMs={elapsedMs} 
+          status={state.status} 
+          justStarted={justStarted} 
+        />
       </div>
 
       <div className="p-6 space-y-8">

@@ -7,6 +7,7 @@ import Script from 'next/script'
 import Navbar from '@/components/layout/Navbar'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://myerp-billing.com'),
   title: 'MyERP — Invoice 2x Faster Than Tally',
   description:
     'Keyboard-first billing for electronics retailers. Create GST invoices in 9 seconds. Built for mobile and electronics shops switching from Tally.',

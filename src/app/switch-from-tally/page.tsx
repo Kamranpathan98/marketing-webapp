@@ -14,6 +14,13 @@ export const metadata: Metadata = {
     title: 'Switch from Tally to MyERP — Invoice 6x Faster | MyERP',
     description: 'Electronics retailers switching from Tally cut billing time from 3 minutes to 9 seconds. Free migration wizard. 14-day trial.',
     type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Switch from Tally to MyERP' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Switch from Tally to MyERP — Invoice 6x Faster',
+    description: 'Cut billing time from 3 minutes to 9 seconds. Built for electronics retailers.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -35,7 +42,7 @@ export default function SwitchFromTallyPage() {
             </span>
             Tally Alternative for Electronics Retailers
           </div>
-          <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight max-w-5xl mx-auto mb-8 leading-[1.1]">
+          <h1 className="clamp-heading font-bold text-white tracking-tight max-w-5xl mx-auto mb-8 leading-[1.1]">
             Still using Tally for your electronics shop? <span className="text-zinc-600 italic">There&apos;s a faster way.</span>
           </h1>
           <p className="text-zinc-400 text-lg md:text-xl max-w-3xl mx-auto font-medium mb-12">

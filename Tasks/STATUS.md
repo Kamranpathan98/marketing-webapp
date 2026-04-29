@@ -16,7 +16,7 @@ Last updated: 2026-04-30
 | P1-T2 | CustomerField + Walk-in skip | [x] COMPLETE |
 | P1-T3 | ProductSearch autocomplete | [x] COMPLETE |
 | P1-T4 | InvoiceTable core | [x] COMPLETE |
-| P1-T5 | SummaryPanel live totals | [ ] NOT STARTED |
+| P1-T5 | SummaryPanel live totals | [x] COMPLETE |
 | P1-T6 | InvoiceTimer + start flash | [ ] NOT STARTED |
 | P1-T7 | Save + SuccessOverlay | [ ] NOT STARTED |
 | P1-T8 | Demo latency audit | [ ] NOT STARTED |

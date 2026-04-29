@@ -100,10 +100,18 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
   }
 }
 
+import SummaryPanel from './SummaryPanel';
+import { calcGST } from '@/lib/gst';
+
 export default function DemoInvoice() {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Derived Values - Computed in render, never stored in state
+  const subtotal = state.items.reduce((sum, item) => sum + item.product.price * item.qty, 0);
+  const gstTotal = state.items.reduce((sum, item) => sum + calcGST(item.product.price * item.qty, item.product.gst), 0);
+  const total = subtotal + gstTotal;
 
   const handleCustomerChange = (customer: string) => {
     dispatch({ type: 'SET_CUSTOMER', payload: { customer } });
@@ -179,14 +187,14 @@ export default function DemoInvoice() {
           onRemove={handleItemRemove}
           disabled={state.status === 'saved'}
         />
-      </div>
-      
-      {/* Footer / Summary Placeholder (P1-T5) */}
-      <div className="p-6 border-t border-surface-border-muted bg-surface-elevated/30 flex justify-end">
-        <div className="text-right space-y-1">
-          <div className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest">Grand Total</div>
-          <div className="text-3xl font-bold text-zinc-700">₹0</div>
-        </div>
+
+        {/* Summary Panel */}
+        <SummaryPanel 
+          subtotal={subtotal}
+          gstTotal={gstTotal}
+          total={total}
+          isEmpty={state.items.length === 0}
+        />
       </div>
     </div>
   );

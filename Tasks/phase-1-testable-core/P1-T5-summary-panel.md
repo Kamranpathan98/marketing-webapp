@@ -1,7 +1,7 @@
 # P1-T5 — SummaryPanel
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4 (needs DemoInvoice state to be wired)
 
@@ -65,14 +65,14 @@ No internal state. Pure presentational component.
 
 ## Acceptance Criteria
 
-- [ ] SummaryPanel has no internal state — all values received as props
-- [ ] Subtotal, CGST+SGST, and Total rows are all displayed
-- [ ] Total amount is bold and amber colored
-- [ ] When items.length === 0: panel is visible but dimmed
-- [ ] Adding an item: total updates immediately (same render cycle as ADD_ITEM dispatch)
-- [ ] Changing qty: total updates immediately
-- [ ] Removing an item: total updates immediately
-- [ ] All amounts formatted as INR with en-IN locale (₹24,999 not ₹24999)
-- [ ] `lib/formatCurrency.ts` exists and is used by SummaryPanel (not inline Intl calls)
-- [ ] Total value CSS transition: brief scale on change (150ms, transform only)
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] SummaryPanel has no internal state — all values received as props
+- [x] Subtotal, CGST+SGST, and Total rows are all displayed
+- [x] Total amount is bold and amber colored
+- [x] When items.length === 0: panel is visible but dimmed
+- [x] Adding an item: total updates immediately (same render cycle as ADD_ITEM dispatch)
+- [x] Changing qty: total updates immediately
+- [x] Removing an item: total updates immediately
+- [x] All amounts formatted as INR with en-IN locale (₹24,999 not ₹24999)
+- [x] `lib/formatCurrency.ts` exists and is used by SummaryPanel (not inline Intl calls)
+- [x] Total value CSS transition: brief scale on change (150ms, transform only)
+- [x] `npx tsc --noEmit` passes with 0 errors

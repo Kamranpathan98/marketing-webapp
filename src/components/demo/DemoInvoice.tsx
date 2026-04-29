@@ -1,10 +1,13 @@
-'use client';
-
-import React, { useReducer, useCallback, useRef } from 'react';
+import React, { useReducer, useCallback, useRef, useEffect } from 'react';
 import { InvoiceState, InvoiceAction, Product } from '@/types/invoice';
 import CustomerField from './CustomerField';
 import ProductSearch from './ProductSearch';
 import InvoiceTable from './InvoiceTable';
+import SummaryPanel from './SummaryPanel';
+import InvoiceTimer from './InvoiceTimer';
+import SuccessOverlay from './SuccessOverlay';
+import { useInvoiceTimer } from '@/hooks/useInvoiceTimer';
+import { calcGST } from '@/lib/gst';
 
 const initialState: InvoiceState = {
   customer: '',
@@ -16,8 +19,6 @@ const initialState: InvoiceState = {
   firstDropdownOpened: false,
 };
 
-import InvoiceTimer from './InvoiceTimer';
-import { useInvoiceTimer } from '@/hooks/useInvoiceTimer';
 
 function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceState {
   switch (action.type) {
@@ -103,10 +104,13 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
   }
 }
 
-import SummaryPanel from './SummaryPanel';
-import { calcGST } from '@/lib/gst';
 
-export default function DemoInvoice() {
+interface DemoInvoiceProps {
+  onSave?: (elapsedMs: number) => void;
+  onReset?: () => void;
+}
+
+export default function DemoInvoice({ onSave, onReset }: DemoInvoiceProps) {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -120,6 +124,33 @@ export default function DemoInvoice() {
   const subtotal = state.items.reduce((sum, item) => sum + item.product.price * item.qty, 0);
   const gstTotal = state.items.reduce((sum, item) => sum + calcGST(item.product.price * item.qty, item.product.gst), 0);
   const total = subtotal + gstTotal;
+
+  const handleSave = useCallback(() => {
+    if (state.items.length > 0 && state.status !== 'saved') {
+      dispatch({ type: 'SAVE' });
+      if (onSave && state.startTime) {
+        onSave(Date.now() - state.startTime);
+      }
+    }
+  }, [state.items.length, state.status, state.startTime, onSave]);
+
+  const handleReset = useCallback(() => {
+    dispatch({ type: 'RESET' });
+    setFocusedField('customer');
+    if (onReset) onReset();
+  }, [onReset]);
+
+  // F2 Shortcut listener
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'F2') {
+        e.preventDefault();
+        handleSave();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [handleSave]);
 
   const handleCustomerChange = (customer: string) => {
     dispatch({ type: 'SET_CUSTOMER', payload: { customer } });
@@ -155,14 +186,26 @@ export default function DemoInvoice() {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-surface-card border border-surface-border rounded-xl shadow-2xl overflow-hidden font-sans">
+    <div className={`
+      relative w-full max-w-4xl mx-auto bg-surface-card border rounded-xl shadow-2xl overflow-hidden font-sans transition-all duration-400
+      ${state.status === 'saved' 
+        ? 'border-green-500/40 shadow-[0_0_30px_rgba(34,197,94,0.08)]' 
+        : 'border-surface-border'}
+    `}>
+      {/* Success Overlay */}
+      {state.status === 'saved' && (
+        <SuccessOverlay elapsedMs={state.savedMs || 0} onReset={handleReset} />
+      )}
+
       {/* Demo Header */}
       <div className="p-4 border-b border-surface-border-muted bg-surface-elevated/50 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-wider">
             Live Demo
           </div>
-          <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest">New Invoice #8843</span>
+          <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest">
+            New Invoice #{state.startTime ? (state.startTime % 10000).toString().padStart(4, '0') : '8843'}
+          </span>
         </div>
         <InvoiceTimer 
           elapsedMs={elapsedMs} 
@@ -200,13 +243,26 @@ export default function DemoInvoice() {
           disabled={state.status === 'saved'}
         />
 
-        {/* Summary Panel */}
-        <SummaryPanel 
-          subtotal={subtotal}
-          gstTotal={gstTotal}
-          total={total}
-          isEmpty={state.items.length === 0}
-        />
+        {/* Footer Summary & Save */}
+        <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+          <div className="w-full md:w-auto">
+            <button
+              onClick={handleSave}
+              disabled={state.items.length === 0 || state.status === 'saved'}
+              className="h-11 px-8 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-all flex items-center gap-2 group"
+            >
+              <span>Save Invoice</span>
+              <kbd className="text-[10px] bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-500 group-hover:text-zinc-300 transition-colors">F2</kbd>
+            </button>
+          </div>
+
+          <SummaryPanel 
+            subtotal={subtotal}
+            gstTotal={gstTotal}
+            total={total}
+            isEmpty={state.items.length === 0}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 # P1-T7 — Save Action + SuccessOverlay
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: P1-T4, P1-T5, P1-T6 (must have invoice state, totals, timer working)
 
@@ -110,24 +110,24 @@ When status changes to 'saved':
 
 ## Acceptance Criteria
 
-- [ ] F2 key dispatches SAVE when items.length > 0
-- [ ] F2 key with no items: silent ignore (no error state, no message)
-- [ ] F2 key after already saved: silent ignore
-- [ ] Save button is disabled when items.length === 0
-- [ ] No loading state: success state appears immediately on save (same render cycle)
-- [ ] SuccessOverlay shows elapsed time in X.Xs format
-- [ ] Trust line present: "This is exactly how it works in real billing. No shortcuts." (exact copy)
-- [ ] Ownership hook present: "This invoice can be yours in one click." (exact copy)
-- [ ] Tally comparison bar fills over exactly 3 real seconds
-- [ ] Tally comparison bar uses CSS animation (not JS setInterval)
-- [ ] "3+ minutes" text appears after bar completes
-- [ ] CTA button text: "Start free trial and keep this invoice" (exact copy)
-- [ ] "Create another invoice" resets the demo completely
-- [ ] After reset: customer field is auto-focused
-- [ ] After reset: new invoice number is generated
-- [ ] Invoice border turns green on save (400ms transition)
-- [ ] DemoConversionBar appears 500ms after save
-- [ ] DemoConversionBar slides up from bottom (CSS transform, not JS animation)
-- [ ] DemoConversionBar disappears on reset
-- [ ] F2 global listener is cleaned up on unmount (removeEventListener)
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] F2 key dispatches SAVE when items.length > 0
+- [x] F2 key with no items: silent ignore (no error state, no message)
+- [x] F2 key after already saved: silent ignore
+- [x] Save button is disabled when items.length === 0
+- [x] No loading state: success state appears immediately on save (same render cycle)
+- [x] SuccessOverlay shows elapsed time in X.Xs format
+- [x] Trust line present: "This is exactly how it works in real billing. No shortcuts." (exact copy)
+- [x] Ownership hook present: "This invoice can be yours in one click." (exact copy)
+- [x] Tally comparison bar fills over exactly 3 real seconds
+- [x] Tally comparison bar uses CSS animation (not JS setInterval)
+- [x] "3+ minutes" text appears after bar completes
+- [x] CTA button text: "Start free trial and keep this invoice" (exact copy)
+- [x] "Create another invoice" resets the demo completely
+- [x] After reset: customer field is auto-focused
+- [x] After reset: new invoice number is generated
+- [x] Invoice border turns green on save (400ms transition)
+- [x] DemoConversionBar appears 500ms after save
+- [x] DemoConversionBar slides up from bottom (CSS transform, not JS animation)
+- [x] DemoConversionBar disappears on reset
+- [x] F2 global listener is cleaned up on unmount (removeEventListener)
+- [x] `npx tsc --noEmit` passes with 0 errors

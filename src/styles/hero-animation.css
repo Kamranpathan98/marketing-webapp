@@ -1,0 +1,105 @@
+@property --num {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+/* Base Container Animation */
+.hero-animation-container {
+  animation: main-fade 3s linear infinite;
+}
+
+@keyframes main-fade {
+  0%, 90% { opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+
+/* Typing Effect */
+.typing-text::after {
+  content: "";
+  animation: typing-content 3s linear infinite;
+}
+
+@keyframes typing-content {
+  0% { content: ""; }
+  2% { content: "S"; }
+  5% { content: "Sa"; }
+  8% { content: "Sam"; }
+  11% { content: "Sam."; }
+  14% { content: "Sam.."; }
+  17%, 100% { content: "Sam..."; }
+}
+
+/* Row 1: Samsung */
+.row-1 {
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: row-reveal 3s ease-out infinite;
+  animation-delay: 0.8s; /* This won't work for infinite loops as expected, need to bake into % */
+}
+
+/* Corrected Row Animations */
+@keyframes row-1-reveal {
+  0%, 26% { opacity: 0; transform: translateY(-8px); }
+  30%, 90% { opacity: 1; transform: translateY(0); }
+  96%, 100% { opacity: 0; }
+}
+
+.row-1-anim {
+  animation: row-1-reveal 3s ease-out infinite;
+}
+
+@keyframes row-2-reveal {
+  0%, 40% { opacity: 0; transform: translateY(-8px); }
+  44%, 90% { opacity: 1; transform: translateY(0); }
+  96%, 100% { opacity: 0; }
+}
+
+.row-2-anim {
+  animation: row-2-reveal 3s ease-out infinite;
+}
+
+/* Total Counter */
+@keyframes counter-reveal {
+  0%, 66% { opacity: 0; --num: 0; }
+  67% { opacity: 1; }
+  86%, 90% { --num: 122357; opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+
+.counter-anim {
+  animation: counter-reveal 3s ease-out infinite;
+  counter-reset: num var(--num);
+}
+
+.counter-anim::after {
+  content: "₹" counter(num);
+}
+
+/* Saved Badge */
+@keyframes badge-reveal {
+  0%, 86% { opacity: 0; transform: scale(0.9); }
+  90%, 94% { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; }
+}
+
+.badge-anim {
+  animation: badge-reveal 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-animation-container,
+  .row-1-anim,
+  .row-2-anim,
+  .counter-anim,
+  .badge-anim,
+  .typing-text::after {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .typing-text::after { content: "Sam..."; }
+  .counter-anim::after { content: "₹1,22,357"; }
+}

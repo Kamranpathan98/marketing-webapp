@@ -1,13 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
-  :root {
-    --font-geist-sans: 'Geist', system-ui, sans-serif;
-    --font-geist-mono: 'Geist Mono', monospace;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -15,36 +8,28 @@
   body {
     background-color: #0A0A0A;
     color: #ffffff;
-    font-family: var(--font-geist-sans);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  * {
-    box-sizing: border-box;
   }
 
   /* Remove number input arrows */
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
   }
   input[type='number'] {
     -moz-appearance: textfield;
-  }
-
-  /* Focus ring — consistent across demo inputs */
-  .demo-input:focus {
-    outline: none;
-    border-color: rgba(245, 158, 11, 0.4);
+    appearance: textfield;
   }
 }
 
 @layer utilities {
   /* Ghost value — Walk-in Customer pre-fill styling */
   .ghost-value {
-    color: rgb(113 113 122); /* zinc-500 */
+    color: var(--color-zinc-500);
     font-style: italic;
   }
 
@@ -55,5 +40,10 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  .demo-input:focus {
+    outline: none;
+    border-color: rgba(245, 158, 11, 0.4);
   }
 }

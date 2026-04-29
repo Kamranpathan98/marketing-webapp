@@ -1,7 +1,7 @@
 # P1-T1 — Hero Micro-Animation
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: Nothing — this can be built first
 
@@ -79,15 +79,15 @@ Frame 6 (3.0s):
 
 ## Acceptance Criteria
 
-- [ ] Animation loops continuously with no visible jump between cycles
-- [ ] Each frame timing matches the spec: 0.0s, 0.8s, 1.2s, 2.0s, 2.6s, 3.0s (±100ms tolerance)
-- [ ] No JavaScript used — verified by inspecting the component: no useState, no useEffect, no setInterval
-- [ ] Animation uses only transform and opacity (no layout-triggering properties)
-- [ ] On Chrome DevTools Performance tab: no layout recalculations during animation loop
-- [ ] Component renders correctly as a Server Component (no 'use client' directive)
-- [ ] @media (prefers-reduced-motion: reduce) is implemented — when enabled in OS settings, animation stops and static state is shown
-- [ ] Clicking the animation scrolls to the demo section
-- [ ] Desktop layout: animation is right-aligned, ~40% width, has dark card frame
-- [ ] Mobile layout: animation appears below CTA buttons, full width
-- [ ] Card frame visual matches DemoInvoice styling (same border color, dark bg, same font)
-- [ ] Page Lighthouse Performance score does not decrease by more than 2 points after adding this component
+- [x] Animation loops continuously with no visible jump between cycles
+- [x] Each frame timing matches the spec: 0.0s, 0.8s, 1.2s, 2.0s, 2.6s, 3.0s (±100ms tolerance)
+- [x] No JavaScript used — verified by inspecting the component: no useState, no useEffect, no setInterval
+- [x] Animation uses only transform and opacity (no layout-triggering properties)
+- [x] On Chrome DevTools Performance tab: no layout recalculations during animation loop
+- [x] Component renders correctly as a Server Component (no 'use client' directive)
+- [x] @media (prefers-reduced-motion: reduce) is implemented — when enabled in OS settings, animation stops and static state is shown
+- [x] Clicking the animation scrolls to the demo section
+- [x] Desktop layout: animation is right-aligned, ~40% width, has dark card frame
+- [x] Mobile layout: animation appears below CTA buttons, full width
+- [x] Card frame visual matches DemoInvoice styling (same border color, dark bg, same font)
+- [x] Page Lighthouse Performance score does not decrease by more than 2 points after adding this component

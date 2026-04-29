@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { track } from '@/lib/analytics';
 
 interface SuccessOverlayProps {
   elapsedMs: number;
@@ -15,6 +17,15 @@ interface SuccessOverlayProps {
 export default function SuccessOverlay({ elapsedMs, onReset }: SuccessOverlayProps) {
   const [showTallyText, setShowTallyText] = useState(false);
   const seconds = (elapsedMs / 1000).toFixed(1);
+
+  const handleCtaClick = () => {
+    track({
+      event: 'signup_cta_clicked',
+      source: 'success_overlay',
+      demo_completed: true,
+      elapsed_ms: elapsedMs
+    });
+  };
 
   useEffect(() => {
     // Show the "3+ minutes" text after the 3-second bar animation finishes
@@ -56,9 +67,13 @@ export default function SuccessOverlay({ elapsedMs, onReset }: SuccessOverlayPro
         </div>
 
         <div className="flex flex-col gap-4 pt-4">
-          <button className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-widest text-sm rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-amber-500/20">
+          <Link 
+            href="/signup"
+            onClick={handleCtaClick}
+            className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-widest text-sm rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-amber-500/20 flex items-center justify-center"
+          >
             Start free trial and keep this invoice
-          </button>
+          </Link>
           <button 
             onClick={onReset}
             className="text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors py-2"

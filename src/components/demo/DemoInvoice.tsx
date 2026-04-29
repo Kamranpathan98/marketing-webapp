@@ -111,6 +111,8 @@ interface DemoInvoiceProps {
   onStateChange?: (status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => void;
 }
 
+import { track } from '@/lib/analytics';
+
 export interface DemoInvoiceRef {
   triggerAutoFocus: () => void;
 }
@@ -129,9 +131,6 @@ const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({
     triggerAutoFocus: () => {
       if (state.status === 'idle' && !state.hasInteracted) {
         setFocusedField('customer');
-        // We need to trigger the actual focus on the element.
-        // The CustomerField component handles its own autofocus based on the prop,
-        // but we might need to force it if it already mounted.
         const el = document.getElementById('customer-name-input');
         if (el) (el as HTMLInputElement).focus({ preventScroll: true });
       }
@@ -157,18 +156,32 @@ const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({
 
   const handleSave = useCallback(() => {
     if (state.items.length > 0 && state.status !== 'saved') {
+      const elapsed = state.startTime ? Date.now() - state.startTime : 0;
       dispatch({ type: 'SAVE' });
-      if (onSave && state.startTime) {
-        onSave(Date.now() - state.startTime);
+      
+      track({
+        event: 'demo_completed',
+        elapsed_ms: elapsed,
+        item_count: state.items.length,
+        used_walk_in: state.customer === 'Walk-in Customer'
+      });
+
+      if (onSave) {
+        onSave(elapsed);
       }
     }
-  }, [state.items.length, state.status, state.startTime, onSave]);
+  }, [state.items.length, state.status, state.startTime, state.customer, onSave]);
 
   const handleReset = useCallback(() => {
+    track({
+      event: 'demo_reset',
+      previous_elapsed_ms: state.savedMs,
+      reset_after_save: state.status === 'saved'
+    });
     dispatch({ type: 'RESET' });
     setFocusedField('customer');
     if (onReset) onReset();
-  }, [onReset]);
+  }, [onReset, state.savedMs, state.status]);
 
   // Ctrl+S Shortcut listener
   useEffect(() => {
@@ -183,11 +196,23 @@ const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({
   }, [handleSave]);
 
   const handleCustomerChange = (customer: string) => {
+    if (!state.hasInteracted) {
+      track({ event: 'demo_started', trigger: 'customer_field' });
+    }
     dispatch({ type: 'SET_CUSTOMER', payload: { customer } });
   };
 
   const handleItemAdd = (product: Product) => {
+    if (!state.hasInteracted) {
+      track({ event: 'demo_started', trigger: 'product_search' });
+    }
     dispatch({ type: 'ADD_ITEM', payload: { product } });
+    track({ 
+      event: 'demo_item_added', 
+      product_category: product.category,
+      item_count: state.items.length + 1,
+      elapsed_ms: state.startTime ? Date.now() - state.startTime : 0
+    });
   };
 
   const handleQtyChange = (index: number, qty: number) => {

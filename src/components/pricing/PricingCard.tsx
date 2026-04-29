@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { track } from '@/lib/analytics';
 
 interface PricingPlan {
   name: string;
@@ -18,10 +21,18 @@ interface PricingCardProps {
 
 /**
  * PricingCard
- * A purely static Server Component that renders both pricing tiers.
- * Visibility is controlled by CSS based on a root data-attribute.
+ * Displays a single pricing plan with a CTA.
  */
 export default function PricingCard({ plan }: PricingCardProps) {
+  const handleCtaClick = () => {
+    track({
+      event: 'signup_cta_clicked',
+      source: 'pricing_section',
+      demo_completed: false, // Default for global pricing section
+      elapsed_ms: null
+    });
+  };
+
   return (
     <div className={`
       relative p-8 rounded-3xl border transition-all duration-300 flex flex-col h-full
@@ -85,6 +96,7 @@ export default function PricingCard({ plan }: PricingCardProps) {
 
       <Link 
         href="/signup"
+        onClick={handleCtaClick}
         className={`
           w-full py-4 rounded-xl font-bold text-sm transition-all text-center
           ${plan.highlighted 

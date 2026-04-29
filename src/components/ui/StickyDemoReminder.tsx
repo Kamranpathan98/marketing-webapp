@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { track } from '@/lib/analytics';
 
 interface StickyDemoReminderProps {
   demoStatus: 'idle' | 'active' | 'saved';
@@ -75,7 +76,18 @@ export default function StickyDemoReminder({
           </div>
 
           {isLink ? (
-            <Link href="/signup" className={commonClasses}>
+            <Link 
+              href="/signup" 
+              className={commonClasses}
+              onClick={() => {
+                track({
+                  event: 'signup_cta_clicked',
+                  source: 'sticky_reminder',
+                  demo_completed: true,
+                  elapsed_ms: savedMs
+                });
+              }}
+            >
               {buttonText}
             </Link>
           ) : (

@@ -1,7 +1,7 @@
 # P3-T3 — Analytics Instrumentation
 
 **Phase**: 3 — Polish and Acquisition  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4, P1-T7, P2-T5 (demo and signup must exist to instrument)
 
@@ -100,25 +100,25 @@ All 5 events call track() — no direct gtag calls scattered through components.
 
 ## Files to Create/Modify
 
-- `lib/analytics.ts` — analytics wrapper
-- `components/demo/DemoInvoice.tsx` — fire demo_started, demo_item_added, demo_completed, demo_reset
-- `components/demo/SuccessOverlay.tsx` — fire signup_cta_clicked (source: success_overlay)
-- `components/demo/DemoConversionBar.tsx` — fire signup_cta_clicked (source: demo_conversion_bar)
-- `components/sections/PricingSection.tsx` — fire signup_cta_clicked (source: pricing_section)
-- `components/ui/StickyDemoReminder.tsx` — fire signup_cta_clicked (source: sticky_reminder)
+- [x] `lib/analytics.ts` — analytics wrapper
+- [x] `components/demo/DemoInvoice.tsx` — fire demo_started, demo_item_added, demo_completed, demo_reset
+- [x] `components/demo/SuccessOverlay.tsx` — fire signup_cta_clicked (source: success_overlay)
+- [x] `components/demo/DemoConversionBar.tsx` — fire signup_cta_clicked (source: demo_conversion_bar)
+- [x] `components/sections/PricingSection.tsx` — fire signup_cta_clicked (source: pricing_section)
+- [x] `components/ui/StickyDemoReminder.tsx` — fire signup_cta_clicked (source: sticky_reminder)
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] `lib/analytics.ts` exists with the track() wrapper function
-- [ ] In development: track() logs to console.log with `[analytics]` prefix
-- [ ] In production: track() calls window.gtag if available (does not throw if gtag absent)
-- [ ] demo_started fires on first keystroke, payload includes correct trigger field
-- [ ] demo_item_added fires on every item add, payload includes product_category and item_count
-- [ ] demo_completed fires on save, payload includes elapsed_ms and used_walk_in
-- [ ] signup_cta_clicked fires from all 4 CTA locations, payload includes correct source value
-- [ ] demo_reset fires on reset, payload includes reset_after_save boolean
-- [ ] No event fires twice for the same user action
-- [ ] All event payloads match the TypeScript types exactly (no missing fields)
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] `lib/analytics.ts` exists with the track() wrapper function
+- [x] In development: track() logs to console.log with `[analytics]` prefix
+- [x] In production: track() calls window.gtag if available (does not throw if gtag absent)
+- [x] demo_started fires on first keystroke, payload includes correct trigger field
+- [x] demo_item_added fires on every item add, payload includes product_category and item_count
+- [x] demo_completed fires on save, payload includes elapsed_ms and used_walk_in
+- [x] signup_cta_clicked fires from all 4 CTA locations, payload includes correct source value
+- [x] demo_reset fires on reset, payload includes reset_after_save boolean
+- [x] No event fires twice for the same user action
+- [x] All event payloads match the TypeScript types exactly (no missing fields)
+- [x] `npx tsc --noEmit` passes with 0 errors

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { track } from '@/lib/analytics';
 
 interface DemoConversionBarProps {
   elapsedMs: number;
@@ -12,6 +13,15 @@ interface DemoConversionBarProps {
  */
 export default function DemoConversionBar({ elapsedMs }: DemoConversionBarProps) {
   const seconds = (elapsedMs / 1000).toFixed(1);
+
+  const handleCtaClick = () => {
+    track({
+      event: 'signup_cta_clicked',
+      source: 'demo_conversion_bar',
+      demo_completed: true,
+      elapsed_ms: elapsedMs
+    });
+  };
 
   return (
     <div className="fixed bottom-0 left-0 w-full z-[100] animate-slide-up px-4 pb-4 md:pb-8">
@@ -27,6 +37,7 @@ export default function DemoConversionBar({ elapsedMs }: DemoConversionBarProps)
           <div className="flex flex-col items-center md:items-end gap-2 w-full md:w-auto">
             <Link 
               href="/signup"
+              onClick={handleCtaClick}
               className="w-full md:w-auto px-8 h-12 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center"
             >
               Start free trial

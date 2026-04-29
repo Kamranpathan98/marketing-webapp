@@ -195,10 +195,10 @@ export default function DemoInvoice({ onSave, onReset, onStateChange }: DemoInvo
 
   return (
     <div className={`
-      relative w-full max-w-4xl mx-auto bg-surface-card border rounded-xl shadow-2xl overflow-hidden font-sans transition-all duration-400
+      relative w-full max-w-4xl mx-auto bg-surface-card border rounded-xl shadow-2xl overflow-hidden font-sans transition-all
       ${state.status === 'saved' 
-        ? 'border-green-500/40 shadow-[0_0_30px_rgba(34,197,94,0.08)]' 
-        : 'border-surface-border'}
+        ? 'border-green-500/40 shadow-[0_0_30px_rgba(34,197,94,0.08)] duration-400' 
+        : 'border-surface-border duration-200'}
     `}>
       {/* Success Overlay */}
       {state.status === 'saved' && (

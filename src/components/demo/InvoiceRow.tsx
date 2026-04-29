@@ -30,13 +30,20 @@ export default function InvoiceRow({
   const { product, qty, imei = '' } = item;
   const isSmartphone = product.category === 'Smartphone';
   
+  const [isNew, setIsNew] = React.useState(true);
+  
+  React.useEffect(() => {
+    const timer = setTimeout(() => setIsNew(false), 200);
+    return () => clearTimeout(timer);
+  }, []);
+
   const unitPrice = product.price;
   const lineSubtotal = unitPrice * qty;
   const lineGst = calcGST(lineSubtotal, product.gst);
   const lineTotal = lineSubtotal + lineGst;
 
   return (
-    <div className="group flex items-start p-3 border-b border-surface-border-muted/50 hover:bg-surface-elevated/30 transition-colors">
+    <div className={`group flex items-start p-3 border-b border-surface-border-muted/50 hover:bg-surface-elevated/30 transition-colors ${isNew ? 'row-enter' : ''}`}>
       {/* Item Details */}
       <div className="flex-1 min-w-0 pr-4">
         <div className="flex flex-col gap-0.5">

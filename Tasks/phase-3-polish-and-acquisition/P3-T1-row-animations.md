@@ -1,7 +1,7 @@
 # P3-T1 — Row Animations + Micro-Interactions
 
 **Phase**: 3 — Polish and Acquisition  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4, P1-T5, P1-T7 (invoice table, summary panel, and save overlay must work)
 
@@ -83,16 +83,16 @@ On RESET:
 
 ## Acceptance Criteria
 
-- [ ] New rows slide in from above (translateY -6px → 0) when added to table
-- [ ] Slide-in animation duration is ~180ms
-- [ ] Only the newly added row animates — existing rows do not shift
-- [ ] Incrementing qty on an existing row: no slide animation
-- [ ] Grand total pulses to scale(1.05) when any item change occurs
-- [ ] Total pulse animation duration is ~150ms
-- [ ] Total pulse uses CSS animation (not JS transform manipulation)
-- [ ] Invoice border transitions to green on save (400ms)
-- [ ] Box-shadow glow appears on save alongside border color
-- [ ] Border and shadow return to neutral on reset (200ms)
-- [ ] All animations use only transform and opacity (no layout properties)
-- [ ] Chrome DevTools Performance: no layout recalculations during any of these animations
-- [ ] Demo latency audit still passes after adding these animations (interactions still feel instant)
+- [x] New rows slide in from above (translateY -6px → 0) when added to table
+- [x] Slide-in animation duration is ~180ms
+- [x] Only the newly added row animates — existing rows do not shift
+- [x] Incrementing qty on an existing row: no slide animation
+- [x] Grand total pulses to scale(1.05) when any item change occurs
+- [x] Total pulse animation duration is ~150ms
+- [x] Total pulse uses CSS animation (not JS transform manipulation)
+- [x] Invoice border transitions to green on save (400ms)
+- [x] Box-shadow glow appears on save alongside border color
+- [x] Border and shadow return to neutral on reset (200ms)
+- [x] All animations use only transform and opacity (no layout properties)
+- [x] Chrome DevTools Performance: no layout recalculations during any of these animations
+- [x] Demo latency audit still passes after adding these animations (interactions still feel instant)

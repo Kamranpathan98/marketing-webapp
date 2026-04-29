@@ -55,8 +55,8 @@ export default function SummaryPanel({
         <div className="flex justify-between items-end pt-2 border-t border-surface-border-muted/50">
           <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest pb-1">Grand Total</span>
           <div 
-            className={`text-3xl font-bold text-amber-500 font-mono transition-transform duration-150 ${
-              shouldAnimate ? 'scale-[1.05]' : 'scale-100'
+            className={`text-3xl font-bold text-amber-500 font-mono ${
+              shouldAnimate ? 'total-pulse' : ''
             }`}
           >
             {formatINR(total)}

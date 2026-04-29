@@ -107,3 +107,23 @@
 [data-billing="monthly"] .pricing-annual {
   display: none !important;
 }
+
+/* Micro-interactions */
+.row-enter {
+  animation: rowSlideIn 180ms ease-out forwards;
+}
+
+@keyframes rowSlideIn {
+  from { transform: translateY(-6px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.total-pulse {
+  animation: totalPulse 150ms ease-out;
+}
+
+@keyframes totalPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}

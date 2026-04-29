@@ -1,7 +1,7 @@
 # P1-T3 — ProductSearch with Autocomplete
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: P1-T4 (InvoiceTable must exist to receive added items)
 
@@ -108,20 +108,20 @@ ProductSearchDropdown props (pure presentational):
 
 ## Acceptance Criteria
 
-- [ ] `lib/demoProducts.ts` exists and contains all 10 products with all required fields
-- [ ] Search is synchronous — no API call, no async, verified by Network tab in DevTools (no requests during typing)
-- [ ] Debounce is ≤ 100ms — verified by typing quickly and measuring dropdown open time
-- [ ] First result is auto-highlighted when dropdown opens (no ↓ needed before Enter works)
-- [ ] Arrow ↓ navigates down the list; at last item, wraps to first
-- [ ] Arrow ↑ navigates up the list; at first item, wraps to last
-- [ ] Arrow key response is immediate — no perceptible delay between keypress and highlight change
-- [ ] Enter on highlighted item: item is added to invoice, dropdown closes, query clears, focus stays on search
-- [ ] Tab on highlighted item: same behavior as Enter
-- [ ] Esc: dropdown closes, query clears, focus stays on search field — invoice form does NOT close or reset
-- [ ] Blur with 150ms delay: clicking a result adds the item (blur doesn't fire before click registers)
-- [ ] Stock ≤ 3 shows stock count in red
-- [ ] First dropdown open: footer hint pulses for ~1.6s (2 × 0.8s cycles), then stops permanently
-- [ ] After first item added: pulse never appears again in the session
-- [ ] Pressing ↓ with empty field: all 10 products shown, first highlighted
-- [ ] Component returns null for keyboard hints on viewport < 768px
-- [ ] `npx tsc --noEmit` passes with 0 errors after this component is added
+- [x] `lib/demoProducts.ts` exists and contains all 10 products with all required fields
+- [x] Search is synchronous — no API call, no async, verified by Network tab in DevTools (no requests during typing)
+- [x] Debounce is ≤ 100ms — verified by typing quickly and measuring dropdown open time
+- [x] First result is auto-highlighted when dropdown opens (no ↓ needed before Enter works)
+- [x] Arrow ↓ navigates down the list; at last item, wraps to first
+- [x] Arrow ↑ navigates up the list; at first item, wraps to last
+- [x] Arrow key response is immediate — no perceptible delay between keypress and highlight change
+- [x] Enter on highlighted item: item is added to invoice, dropdown closes, query clears, focus stays on search
+- [x] Tab on highlighted item: same behavior as Enter
+- [x] Esc: dropdown closes, query clears, focus stays on search field — invoice form does NOT close or reset
+- [x] Blur with 150ms delay: clicking a result adds the item (blur doesn't fire before click registers)
+- [x] Stock ≤ 3 shows stock count in red
+- [x] First dropdown open: footer hint pulses for ~1.6s (2 × 0.8s cycles), then stops permanently
+- [x] After first item added: pulse never appears again in the session
+- [x] Pressing ↓ with empty field: all 10 products shown, first highlighted
+- [x] Component returns null for keyboard hints on viewport < 768px
+- [x] `npx tsc --noEmit` passes with 0 errors after this component is added

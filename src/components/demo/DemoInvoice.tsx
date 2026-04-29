@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useReducer, useCallback } from 'react';
-import { InvoiceState, InvoiceAction } from '@/types/invoice';
+import React, { useReducer, useCallback, useRef } from 'react';
+import { InvoiceState, InvoiceAction, Product } from '@/types/invoice';
 
 const initialState: InvoiceState = {
   customer: '',
@@ -15,6 +15,8 @@ const initialState: InvoiceState = {
 
 import CustomerField from './CustomerField';
 
+import ProductSearch from './ProductSearch';
+
 function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceState {
   switch (action.type) {
     case 'SET_CUSTOMER':
@@ -24,6 +26,17 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
         hasInteracted: true,
         startTime: state.startTime || Date.now(),
         status: state.status === 'idle' ? 'active' : state.status,
+      };
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        items: [...state.items, { product: action.payload.product, qty: 1 }],
+        hasInteracted: true,
+      };
+    case 'SET_FIRST_OPEN':
+      return {
+        ...state,
+        firstDropdownOpened: true,
       };
     case 'RESET':
       return initialState;
@@ -35,13 +48,28 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
 export default function DemoInvoice() {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleCustomerChange = (customer: string) => {
     dispatch({ type: 'SET_CUSTOMER', payload: { customer } });
   };
 
+  const handleItemAdd = (product: Product) => {
+    dispatch({ type: 'ADD_ITEM', payload: { product } });
+  };
+
+  const handleFirstOpen = () => {
+    if (!state.firstDropdownOpened) {
+      dispatch({ type: 'SET_FIRST_OPEN' });
+    }
+  };
+
   const handleCustomerConfirm = useCallback(() => {
     setFocusedField('search');
+    // Ensure focus moves to search input
+    setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 10);
   }, []);
 
   return (
@@ -58,14 +86,22 @@ export default function DemoInvoice() {
       </div>
 
       <div className="p-6 space-y-8">
-        {/* Customer Section */}
-        <div className="max-w-md">
+        {/* Customer & Search Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           <CustomerField 
             value={state.customer}
             onChange={handleCustomerChange}
             onConfirm={handleCustomerConfirm}
             disabled={state.status === 'saved'}
             autoFocus={focusedField === 'customer'}
+          />
+
+          <ProductSearch 
+            onItemAdd={handleItemAdd}
+            disabled={state.status === 'saved'}
+            focusRef={searchInputRef}
+            onFirstDropdownOpen={handleFirstOpen}
+            isFirstOpen={!state.firstDropdownOpened}
           />
         </div>
 

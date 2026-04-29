@@ -37,5 +37,6 @@ export type InvoiceAction =
   | { type: 'REMOVE_ITEM'; payload: { index: number } }
   | { type: 'UPDATE_QTY'; payload: { index: number; qty: number } }
   | { type: 'UPDATE_IMEI'; payload: { index: number; imei: string } }
+  | { type: 'SET_FIRST_OPEN' }
   | { type: 'SAVE' }
   | { type: 'RESET' }

@@ -1,86 +1,90 @@
-# MyERP Marketing Website — CLAUDE.md
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project
 
 Marketing website for MyERP — a keyboard-first billing ERP for Indian electronics retailers.
 Core message: "Create invoices 2x faster than Tally"
 
+## Commands
+
+```bash
+npm run dev      # Start dev server (localhost:3000)
+npm run build    # Production build
+npm run start    # Serve production build
+npm run lint     # Run ESLint
+```
+
+No test runner is configured. Verify correctness by running the dev server and exercising demo interactions manually.
+
 ## Tech Stack
 
-- Next.js App Router (latest)
-- TypeScript
-- Tailwind CSS (pure — no component library)
-- React (latest)
+- Next.js 16 App Router
+- React 19 + TypeScript
+- Tailwind CSS v4 (pure — no component library)
 - No backend — demo is fully client-side with hardcoded data
 
-## Folder Structure
+## Architecture
 
-D:\Projects\landing\
-  src/
-    app/                    ← Next.js App Router pages
-      layout.tsx            ← Root layout (Navbar + Footer — not yet built)
-      page.tsx              ← Homepage
-      demo/page.tsx         ← Full demo page
-      pricing/page.tsx      ← Pricing page
-      switch-from-tally/    ← SEO acquisition page (Phase 3)
-      api/signup/           ← API route for trial signup (Phase 2)
-    components/
-      layout/               ← Navbar, Footer
-      sections/             ← Page sections (Hero, Pricing, etc.)
-      hero/                 ← HeroMicroAnimation
-      demo/                 ← All demo components (DemoInvoice, etc.)
-      ui/                   ← Shared primitives (Button, Badge, etc.)
-    hooks/                  ← useInvoiceTimer, useKeyboardNav, etc.
-    lib/                    ← gst.ts, formatCurrency.ts, demoProducts.ts
-    types/                  ← invoice.ts
-    styles/                 ← hero-animation.css (Phase 1)
-  Tasks/                    ← Execution plan + task files (DO NOT MODIFY)
-    EXECUTION_PLAN.md       ← Source of truth for all design decisions
-    STATUS.md               ← Task completion tracker
-    phase-1-testable-core/
-    phase-2-conversion-infrastructure/
-    phase-3-polish-and-acquisition/
+TypeScript path alias `@/` resolves to `src/`. Key modules:
+
+- `src/types/invoice.ts` — `Product`, `InvoiceItem`, `InvoiceState`, `InvoiceAction`, `FocusField` types
+- `src/lib/demoProducts.ts` — `DEMO_PRODUCTS` array + `searchProducts(query)` helper (returns max 6 results, synchronous)
+- `src/lib/gst.ts` — `calcGST(price, rate)` and `calcGSTSplit(price, rate)` — both use `Math.floor`
+- `src/lib/formatCurrency.ts` — uses `en-IN` locale
+
+The full design spec (homepage section order, copy, component tree, keyboard map, auto-focus trigger logic, success overlay content, pricing details) lives in `Tasks/EXECUTION_PLAN.md`. Read it before implementing any UI.
+
+### Server vs Client Components
+
+- Page shells, layout, HeroSection, HeroMicroAnimation, SpeedComparisonSection, FeaturesGrid, TallyMigrationSection, Footer → **Server Components** (no `'use client'`)
+- HeroMicroAnimation → Server Component, pure CSS animation, zero JS
+- DemoInvoice and all its children → **Client Components**
+- Mark `'use client'` only at the lowest necessary level
+
+### Demo State (DemoInvoice)
+
+Uses `useReducer` — never multiple `useState`. State shape and actions are defined in `src/types/invoice.ts`.
+
+Derived values `subtotal`, `gstTotal`, `total` are **never stored in state** — compute from `items` in render.
 
 ## Critical Rules
 
-1. Demo interactions have a latency budget — see Tasks/EXECUTION_PLAN.md
-   - No fetch() inside demo components
-   - No async/await in event handlers
-   - Debounce on search ≤ 100ms
-   - Arrow keys: zero debounce
+**Demo latency (hard limits — violations are spec violations):**
 
-2. DemoInvoice uses useReducer (not multiple useState)
+| Interaction | Max | Method |
+|---|---|---|
+| Keystroke → character appears | 16ms | Controlled input, synchronous |
+| Search → dropdown opens | 100ms | setTimeout debounce ≤ 100ms |
+| Arrow key → highlight moves | 16ms | Synchronous, zero debounce |
+| Enter on result → row added | 50ms | Synchronous reducer dispatch |
+| Qty/total update | 16ms | Derived in render |
+| F2/Save → success state | 50ms | Synchronous reducer dispatch |
 
-3. Derived values (subtotal, gstTotal, total) are NEVER stored in state.
-   Compute in render from items array.
+**Prohibited in demo interaction path:** `fetch()`, `axios`, `async/await` in event handlers, `setTimeout > 100ms`, loading spinners, dynamic imports of product data.
 
-4. Server Components vs Client Components:
-   - Mark 'use client' ONLY at the lowest necessary level
-   - HeroMicroAnimation = Server Component (pure CSS, no JS)
-   - DemoInvoice and all children = Client Components
-   - Page shells = Server Components
+**Permitted:** `setTimeout ≤ 800ms` for visual-only effects (timer flash, pulse), CSS transitions, `requestAnimationFrame`.
 
-5. GST calculation uses Math.floor (not Math.round) — see lib/gst.ts
+## Tailwind Tokens
 
-6. Currency formatting uses en-IN locale — see lib/formatCurrency.ts
+Custom colors defined in `tailwind.config.ts`:
+- `surface` / `surface-card` / `surface-elevated` / `surface-border` / `surface-border-muted` — dark surface palette
+- `amber` / `amber-300` / `amber-400` / `amber-500` / `amber-600` — brand accent
+- `text-2xs` — 11px / 16px line-height
 
-7. All demo product data is in lib/demoProducts.ts — never inline
+Custom animations: `slide-in`, `fade-in-out`, `pulse-once`, `count-up`, `slide-up`.
+
+Background: `bg-grid-texture` with `bg-grid-48` size.
+
+CSS utilities in `globals.css`: `.demo-input` (amber focus ring), `.ghost-value` (italic zinc-500, for Walk-in Customer pre-fill), `.scrollbar-hide`.
+
+Fonts: Geist Sans (`font-sans`) and Geist Mono (`font-mono`) via CSS variables.
 
 ## Task System
 
-All work is tracked in /Tasks. 
-Before starting any task, read the task file in /Tasks/phase-X/
+All work is tracked in `Tasks/`. Before starting any task, read its task file in `Tasks/phase-X/`.
 A task is COMPLETE only when every checkbox in its acceptance criteria is checked.
-Update Tasks/STATUS.md when a task is complete.
+After completing a task, update `Tasks/STATUS.md`.
 
-## Current Status
-
-Phase 1 — Testable Core: IN PROGRESS
-  P1-T1 Hero animation: NOT STARTED
-  P1-T2 CustomerField: NOT STARTED
-  P1-T3 ProductSearch: NOT STARTED
-  P1-T4 InvoiceTable: NOT STARTED
-  P1-T5 SummaryPanel: NOT STARTED
-  P1-T6 Timer: NOT STARTED
-  P1-T7 Save + SuccessOverlay: NOT STARTED
-  P1-T8 Latency audit: NOT STARTED
+Current task status: see `Tasks/STATUS.md`.

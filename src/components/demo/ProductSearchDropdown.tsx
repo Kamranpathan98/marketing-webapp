@@ -37,7 +37,7 @@ export default function ProductSearchDropdown({
               key={product.id}
               onClick={() => onSelect(product)}
               className={`
-                flex items-center justify-between p-3 cursor-pointer transition-colors
+                flex items-center justify-between p-3 cursor-pointer transition-colors sm:h-auto search-result-row
                 ${isHighlighted ? 'bg-amber-500/10 border-l-2 border-amber-500' : 'border-l-2 border-transparent hover:bg-surface-elevated'}
               `}
             >
@@ -71,7 +71,7 @@ export default function ProductSearchDropdown({
         <span className="text-[10px] text-zinc-600 uppercase font-bold tracking-widest">
           {results.length} results
         </span>
-        <div className={`flex items-center gap-1.5 ${isFirstOpen ? 'animate-pulse-once' : ''}`}>
+        <div className={`hidden sm:flex items-center gap-1.5 ${isFirstOpen ? 'animate-pulse-once' : ''}`}>
           <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-tight">
             ↵ Enter to add
           </span>

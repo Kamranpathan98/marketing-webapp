@@ -13,6 +13,22 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Mobile Touch Targets */
+  button, 
+  a, 
+  input[type="button"], 
+  input[type="submit"],
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    min-height: 44px;
+  }
+
   /* Remove number input arrows */
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
@@ -27,6 +43,14 @@
 }
 
 @layer utilities {
+  .clamp-heading {
+    font-size: clamp(28px, 6vw, 72px);
+  }
+
+  .search-result-row {
+    height: 48px;
+  }
+
   /* Ghost value — Walk-in Customer pre-fill styling */
   .ghost-value {
     color: var(--color-zinc-500);

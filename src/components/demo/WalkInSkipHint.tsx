@@ -14,7 +14,7 @@ interface WalkInSkipHintProps {
 export default function WalkInSkipHint({ visible }: WalkInSkipHintProps) {
   return (
     <div 
-      className={`mt-1.5 transition-opacity duration-200 ${
+      className={`mt-1.5 transition-opacity duration-200 hidden sm:block ${
         visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >

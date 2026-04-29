@@ -3,6 +3,8 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
+import Navbar from '@/components/layout/Navbar'
+
 export const metadata: Metadata = {
   title: 'MyERP — Invoice 2x Faster Than Tally',
   description:
@@ -23,7 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <Navbar />
+        {children}
+      </body>
     </html>
   )
 }

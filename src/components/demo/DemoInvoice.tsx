@@ -303,24 +303,26 @@ const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({
         />
 
         {/* Footer Summary & Save */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-6">
-          <div className="w-full md:w-auto">
+        <div className="flex flex-col md:flex-row justify-between items-stretch md:items-end gap-8 md:gap-6">
+          <div className="w-full md:w-auto order-2 md:order-1">
             <button
               onClick={handleSave}
               disabled={state.items.length === 0 || state.status === 'saved'}
-              className="h-11 px-8 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-all flex items-center gap-2 group"
+              className="w-full md:w-auto h-14 md:h-11 px-8 bg-amber-500 md:bg-zinc-800 hover:bg-amber-400 md:hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed text-zinc-950 md:text-white font-black md:font-bold rounded-xl md:rounded-lg transition-all flex items-center justify-center gap-2 group shadow-lg shadow-amber-500/10 md:shadow-none"
             >
-              <span>Save Invoice</span>
-              <kbd className="text-[10px] bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-500 group-hover:text-zinc-300 transition-colors">Ctrl+S</kbd>
+              <span className="uppercase tracking-widest text-xs md:normal-case md:text-base">Save Invoice</span>
+              <kbd className="hidden md:inline-block text-[10px] bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-500 group-hover:text-zinc-300 transition-colors">Ctrl+S</kbd>
             </button>
           </div>
 
-          <SummaryPanel 
-            subtotal={subtotal}
-            gstTotal={gstTotal}
-            total={total}
-            isEmpty={state.items.length === 0}
-          />
+          <div className="order-1 md:order-2">
+            <SummaryPanel 
+              subtotal={subtotal}
+              gstTotal={gstTotal}
+              total={total}
+              isEmpty={state.items.length === 0}
+            />
+          </div>
         </div>
       </div>
     </div>

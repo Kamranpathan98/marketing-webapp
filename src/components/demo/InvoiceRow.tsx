@@ -82,14 +82,14 @@ export default function InvoiceRow({
       </div>
 
       {/* Qty Input */}
-      <div className="w-20 px-4 pt-0.5">
+      <div className="w-20 px-2 sm:px-4 pt-0.5">
         <input
           type="number"
           min="1"
           disabled={disabled}
           value={qty || ''}
           onChange={(e) => onQtyChange(index, parseInt(e.target.value, 10))}
-          className="w-full bg-surface-elevated border border-surface-border rounded px-2 py-1 text-xs text-center text-white focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 outline-none transition-all font-mono"
+          className="w-full h-11 sm:h-8 bg-surface-elevated border border-surface-border rounded px-2 text-xs text-center text-white focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 outline-none transition-all font-mono"
         />
       </div>
 
@@ -103,10 +103,10 @@ export default function InvoiceRow({
         {!disabled && (
           <button
             onClick={() => onRemove(index)}
-            className="absolute -right-1 top-1.5 p-1 text-zinc-600 hover:text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200"
+            className="absolute -right-1 top-1.5 p-2 sm:p-1 text-zinc-600 hover:text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200"
             title="Remove item"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>

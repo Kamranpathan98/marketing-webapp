@@ -27,7 +27,7 @@ export default function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+            <h1 className="clamp-heading font-bold text-white leading-[1.1] tracking-tight">
               Create invoices <span className="text-amber-500">2x faster</span> than Tally.
             </h1>
 

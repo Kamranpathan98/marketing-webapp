@@ -1,7 +1,7 @@
 # P2-T3 — Tally Migration Section
 
 **Phase**: 2 — Conversion Infrastructure  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: Nothing — fully static, no interactivity
 
@@ -58,14 +58,14 @@ Bottom of section — reassurance line:
 
 ## Acceptance Criteria
 
-- [ ] Section heading is exactly: "Your Tally data comes with you."
-- [ ] All 3 migration steps are present with correct headings and body copy (exact copy from spec)
-- [ ] Time estimates present for each step: 5 min, 15 min, 10 min
-- [ ] "Total migration time: about 30 minutes." line is present
-- [ ] "We've migrated 40+ electronics shops from Tally. None of them lost data." line is present
-- [ ] Component has no 'use client' directive — pure Server Component
-- [ ] No negative language about Tally in this section
-- [ ] Section is positioned between FeaturesGrid and Pricing in homepage order
-- [ ] Step numbers are visually large (prominent numbering style)
-- [ ] Time estimate badges are visually distinct from step body copy
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Section heading is exactly: "Your Tally data comes with you."
+- [x] All 3 migration steps are present with correct headings and body copy (exact copy from spec)
+- [x] Time estimates present for each step: 5 min, 15 min, 10 min
+- [x] "Total migration time: about 30 minutes." line is present
+- [x] "We've migrated 40+ electronics shops from Tally. None of them lost data." line is present
+- [x] Component has no 'use client' directive — pure Server Component
+- [x] No negative language about Tally in this section
+- [x] Section is positioned between FeaturesGrid and Pricing in homepage order
+- [x] Step numbers are visually large (prominent numbering style)
+- [x] Time estimate badges are visually distinct from step body copy
+- [x] `npx tsc --noEmit` passes with 0 errors

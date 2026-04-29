@@ -44,7 +44,7 @@ Last updated: 2026-04-30
 | Task | Title | Status |
 |------|-------|--------|
 | P3-T1 | Row animations + micro-interactions | [x] COMPLETE |
-| P3-T2 | Auto-focus velocity refinement | [ ] NOT STARTED |
+| P3-T2 | Auto-focus velocity refinement | [x] COMPLETE |
 | P3-T3 | Analytics instrumentation | [ ] NOT STARTED |
 | P3-T4 | /switch-from-tally page | [ ] NOT STARTED |
 | P3-T5 | Mobile optimization | [ ] NOT STARTED |

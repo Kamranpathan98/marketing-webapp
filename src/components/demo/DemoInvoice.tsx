@@ -111,10 +111,32 @@ interface DemoInvoiceProps {
   onStateChange?: (status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => void;
 }
 
-export default function DemoInvoice({ onSave, onReset, onStateChange }: DemoInvoiceProps) {
+export interface DemoInvoiceRef {
+  triggerAutoFocus: () => void;
+}
+
+const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({ 
+  onSave, 
+  onReset, 
+  onStateChange 
+}, ref) => {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const customerInputRef = useRef<HTMLInputElement>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    triggerAutoFocus: () => {
+      if (state.status === 'idle' && !state.hasInteracted) {
+        setFocusedField('customer');
+        // We need to trigger the actual focus on the element.
+        // The CustomerField component handles its own autofocus based on the prop,
+        // but we might need to force it if it already mounted.
+        const el = document.getElementById('customer-name-input');
+        if (el) (el as HTMLInputElement).focus({ preventScroll: true });
+      }
+    }
+  }));
 
   // Sync state to parent
   React.useEffect(() => {
@@ -274,4 +296,8 @@ export default function DemoInvoice({ onSave, onReset, onStateChange }: DemoInvo
       </div>
     </div>
   );
-}
+});
+
+DemoInvoice.displayName = 'DemoInvoice';
+
+export default DemoInvoice;

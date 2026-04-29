@@ -1,7 +1,7 @@
 # P3-T2 — Auto-Focus Scroll-Velocity Refinement
 
 **Phase**: 3 — Polish and Acquisition  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4 (DemoInvoice must exist with hasInteracted state)
 
@@ -17,10 +17,10 @@ Phase 1 used a simplified trigger — this task implements the complete spec.
 
 ## The 4 Conditions (ALL must be true)
 
-1. Demo section ≥ 50% in viewport — tracked via IntersectionObserver with threshold: 0.5
-2. hasInteracted === false — read from DemoInvoice state
-3. Scroll velocity < 2px/ms — measured via scroll event listener
-4. 350ms have elapsed since viewport threshold was crossed — setTimeout after condition 1 triggers
+1. [x] Demo section ≥ 50% in viewport — tracked via IntersectionObserver with threshold: 0.5
+2. [x] hasInteracted === false — read from DemoInvoice state
+3. [x] Scroll velocity < 2px/ms — measured via scroll event listener
+4. [x] 350ms have elapsed since viewport threshold was crossed — setTimeout after condition 1 triggers
 
 Auto-focus fires only when all 4 are simultaneously true.
 
@@ -76,15 +76,15 @@ InlineDemoSection:
 
 ## Acceptance Criteria
 
-- [ ] Auto-focus does NOT fire while user is actively scrolling fast (velocity ≥ 2px/ms)
-- [ ] Auto-focus DOES fire when user scrolls to demo and comes to rest (velocity < 2px/ms)
-- [ ] 350ms delay is present after demo section crosses 50% viewport threshold
-- [ ] Auto-focus only fires when hasInteracted === false — never fires if user already interacted
-- [ ] Auto-focus never fires on viewport width < 768px (checked at fire time, not mount time)
-- [ ] StickyDemoReminder "Try it now" click: triggers auto-focus bypassing velocity check
-- [ ] StickyDemoReminder override still waits 350ms before focusing
-- [ ] Velocity re-check interval is 50ms when conditions 1 and 4 met but velocity still high
-- [ ] Scroll listener uses { passive: true } flag
-- [ ] IntersectionObserver and scroll listener both clean up on component unmount
-- [ ] Auto-focus fires at most once per demo instance (resets after RESET action)
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Auto-focus does NOT fire while user is actively scrolling fast (velocity ≥ 2px/ms)
+- [x] Auto-focus DOES fire when user scrolls to demo and comes to rest (velocity < 2px/ms)
+- [x] 350ms delay is present after demo section crosses 50% viewport threshold
+- [x] Auto-focus only fires when hasInteracted === false — never fires if user already interacted
+- [x] Auto-focus never fires on viewport width < 768px (checked at fire time, not mount time)
+- [x] StickyDemoReminder "Try it now" click: triggers auto-focus bypassing velocity check
+- [x] StickyDemoReminder override still waits 350ms before focusing
+- [x] Velocity re-check interval is 50ms when conditions 1 and 4 met but velocity still high
+- [x] Scroll listener uses { passive: true } flag
+- [x] IntersectionObserver and scroll listener both clean up on component unmount
+- [x] Auto-focus fires at most once per demo instance (resets after RESET action)
+- [x] `npx tsc --noEmit` passes with 0 errors

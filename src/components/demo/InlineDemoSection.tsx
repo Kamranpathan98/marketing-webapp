@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import DemoInvoice from './DemoInvoice';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import DemoInvoice, { DemoInvoiceRef } from './DemoInvoice';
 import DemoConversionBar from './DemoConversionBar';
 import StickyDemoReminder from '../ui/StickyDemoReminder';
 
 /**
  * InlineDemoSection
  * Wrapper for the interactive demo.
- * Manages the conversion bar appearance after a successful demo.
+ * Manages the conversion bar appearance and the advanced 4-condition autofocus trigger.
  */
 export default function InlineDemoSection() {
   const [demoState, setDemoState] = useState<{
@@ -23,22 +23,84 @@ export default function InlineDemoSection() {
     showConversionBar: false,
   });
 
-  const [isDemoInView, setIsDemoInView] = useState(true);
-  const sectionRef = React.useRef<HTMLElement>(null);
+  const [isDemoInView, setIsDemoInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const demoRef = useRef<DemoInvoiceRef>(null);
 
+  // Advanced Auto-focus State
+  const [isInThreshold, setIsInThreshold] = useState(false);
+  const velocityRef = useRef(0);
+  const hasAutoFocused = useRef(false);
+  const bypassVelocityOnce = useRef(false);
+
+  // 1. Scroll Velocity Listener
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+
+    const handleScroll = () => {
+      const now = Date.now();
+      const dy = Math.abs(window.scrollY - lastScrollY);
+      const dt = now - lastScrollTime;
+      velocityRef.current = dt > 0 ? dy / dt : 0;
+      lastScrollY = window.scrollY;
+      lastScrollTime = now;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 2. Intersection Observer (50% threshold)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsDemoInView(entry.isIntersecting);
+        setIsInThreshold(entry.isIntersecting);
+        // Also update the simple visibility for the sticky reminder (can use a smaller threshold or same)
+        setIsDemoInView(entry.intersectionRatio > 0.1);
       },
-      { threshold: 0.1 }
+      { threshold: [0.1, 0.5] }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const handleSave = React.useCallback((elapsedMs: number) => {
+  // 3. The 4-Condition Autofocus Logic
+  useEffect(() => {
+    // Condition 2: Never fire if user already interacted
+    if (demoState.hasInteracted || hasAutoFocused.current) return;
+
+    // Condition 1: Demo section >= 50% in viewport
+    if (!isInThreshold) return;
+
+    // Condition 4: 350ms delay after threshold
+    const timer = setTimeout(() => {
+      const checkAndFocus = () => {
+        // Final condition check before firing
+        if (demoState.hasInteracted || hasAutoFocused.current) return;
+        
+        // Mobile Override
+        if (window.innerWidth < 768) return;
+
+        // Condition 3: Velocity < 2px/ms (unless bypassed)
+        if (velocityRef.current < 2 || bypassVelocityOnce.current) {
+          demoRef.current?.triggerAutoFocus();
+          hasAutoFocused.current = true;
+          bypassVelocityOnce.current = false;
+        } else {
+          // Re-check every 50ms if velocity is high
+          setTimeout(checkAndFocus, 50);
+        }
+      };
+
+      checkAndFocus();
+    }, 350);
+
+    return () => clearTimeout(timer);
+  }, [isInThreshold, demoState.hasInteracted]);
+
+  const handleSave = useCallback((elapsedMs: number) => {
     setDemoState(prev => ({
       ...prev,
       status: 'saved',
@@ -47,26 +109,27 @@ export default function InlineDemoSection() {
     }));
   }, []);
 
-  const handleReset = React.useCallback(() => {
+  const handleReset = useCallback(() => {
     setDemoState({
       status: 'idle',
       hasInteracted: false,
       elapsedMs: 0,
       showConversionBar: false,
     });
+    hasAutoFocused.current = false;
   }, []);
 
-  const handleStateChange = React.useCallback((status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => {
+  const handleStateChange = useCallback((status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => {
     setDemoState(prev => {
-      // Only update if state actually changed to prevent infinite loops
       if (prev.status === status && prev.hasInteracted === hasInteracted) return prev;
       return { ...prev, status, hasInteracted };
     });
   }, []);
 
-  const handleTryItNow = React.useCallback(() => {
+  const handleTryItNow = useCallback(() => {
     const section = document.getElementById('demo');
     if (section) {
+      bypassVelocityOnce.current = true;
       section.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
@@ -86,7 +149,6 @@ export default function InlineDemoSection() {
       id="demo" 
       className="py-24 bg-surface relative overflow-hidden"
     >
-      {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-grid-texture bg-grid-48 opacity-[0.02] pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
@@ -100,6 +162,7 @@ export default function InlineDemoSection() {
         </div>
 
         <DemoInvoice 
+          ref={demoRef}
           onSave={handleSave} 
           onReset={handleReset} 
           onStateChange={handleStateChange}
@@ -121,12 +184,10 @@ export default function InlineDemoSection() {
         </div>
       </div>
 
-      {/* Slide-up Conversion Bar */}
       {demoState.showConversionBar && (
         <DemoConversionBar elapsedMs={demoState.elapsedMs} />
       )}
 
-      {/* Fixed Sticky Reminder */}
       <StickyDemoReminder 
         demoStatus={demoState.status}
         hasInteracted={demoState.hasInteracted}

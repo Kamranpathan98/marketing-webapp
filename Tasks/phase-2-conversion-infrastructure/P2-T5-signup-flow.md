@@ -1,7 +1,7 @@
 # P2-T5 — Signup Flow
 
 **Phase**: 2 — Conversion Infrastructure  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: Nothing in Phase 2 — can be built standalone
 
@@ -88,21 +88,21 @@ This page will be fleshed out in a future task.
 
 ## Acceptance Criteria
 
-- [ ] Form has exactly 2 fields: email and password
-- [ ] Email field is auto-focused on mount
-- [ ] Password field has minLength=8 client-side validation
-- [ ] Inline error shown below email field if invalid on blur
-- [ ] Inline error shown below password field if < 8 characters on blur
-- [ ] Submit button text is "Start free trial"
-- [ ] Submit button shows "Creating account..." while request is in-flight
-- [ ] Submit button is disabled while request is in-flight
-- [ ] On 201 response: redirects to /onboarding
-- [ ] On 409 response: shows "An account with this email already exists. Sign in instead." below email field
-- [ ] On 500/network error: shows "Something went wrong. Please try again." below submit button
-- [ ] API route file is at `app/api/signup/route.ts`
-- [ ] Password is hashed with bcrypt before storage (never stored in plaintext)
-- [ ] Duplicate email returns 409
-- [ ] Response body never contains password or hash
-- [ ] `data/users.json` exists and is initialized as `[]`
-- [ ] /onboarding page exists with correct heading copy
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Form has exactly 2 fields: email and password
+- [x] Email field is auto-focused on mount
+- [x] Password field has minLength=8 client-side validation
+- [x] Inline error shown below email field if invalid on blur
+- [x] Inline error shown below password field if < 8 characters on blur
+- [x] Submit button text is "Start free trial"
+- [x] Submit button shows "Creating account..." while request is in-flight
+- [x] Submit button is disabled while request is in-flight
+- [x] On 201 response: redirects to /onboarding
+- [x] On 409 response: shows "An account with this email already exists. Sign in instead." below email field
+- [x] On 500/network error: shows "Something went wrong. Please try again." below submit button
+- [x] API route file is at `app/api/signup/route.ts`
+- [x] Password is hashed with bcrypt before storage (never stored in plaintext)
+- [x] Duplicate email returns 409
+- [x] Response body never contains password or hash
+- [x] `data/users.json` exists and is initialized as `[]`
+- [x] /onboarding page exists with correct heading copy
+- [x] `npx tsc --noEmit` passes with 0 errors

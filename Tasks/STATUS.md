@@ -33,9 +33,9 @@ Last updated: 2026-04-30
 | P2-T2 | Pricing section | [x] COMPLETE |
 | P2-T3 | Tally Migration section | [x] COMPLETE |
 | P2-T4 | StickyDemoReminder | [x] COMPLETE |
-| P2-T5 | Signup flow | [ ] NOT STARTED |
+| P2-T5 | Signup flow | [x] COMPLETE |
 
-**Phase 2 Gate**: [ ] All tasks COMPLETE + [ ] Signup flow tested end-to-end
+**Phase 2 Gate**: [x] All tasks COMPLETE + [x] Signup flow tested end-to-end
 
 ---
 

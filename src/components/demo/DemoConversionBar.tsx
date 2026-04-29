@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import Link from 'next/link';
 
 interface DemoConversionBarProps {
   elapsedMs: number;
@@ -25,9 +25,12 @@ export default function DemoConversionBar({ elapsedMs }: DemoConversionBarProps)
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-2 w-full md:w-auto">
-            <button className="w-full md:w-auto px-8 h-12 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl transition-all shadow-lg shadow-amber-500/20">
+            <Link 
+              href="/signup"
+              className="w-full md:w-auto px-8 h-12 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center"
+            >
               Start free trial
-            </button>
+            </Link>
             <p className="text-[10px] text-zinc-500 font-medium uppercase tracking-widest">
               14 days free · No credit card · Cancel anytime
             </p>

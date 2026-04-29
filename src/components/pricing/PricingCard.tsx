@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface PricingPlan {
   name: string;
@@ -82,14 +83,17 @@ export default function PricingCard({ plan }: PricingCardProps) {
         ))}
       </ul>
 
-      <button className={`
-        w-full py-4 rounded-xl font-bold text-sm transition-all
-        ${plan.highlighted 
-          ? 'bg-amber-500 text-zinc-950 hover:bg-amber-400 shadow-[0_4px_20px_rgba(245,158,11,0.2)]' 
-          : 'bg-zinc-800 text-white hover:bg-zinc-700'}
-      `}>
+      <Link 
+        href="/signup"
+        className={`
+          w-full py-4 rounded-xl font-bold text-sm transition-all text-center
+          ${plan.highlighted 
+            ? 'bg-amber-500 text-zinc-950 hover:bg-amber-400 shadow-[0_4px_20px_rgba(245,158,11,0.2)]' 
+            : 'bg-zinc-800 text-white hover:bg-zinc-700'}
+        `}
+      >
         Start 14-Day Free Trial
-      </button>
+      </Link>
     </div>
   );
 }

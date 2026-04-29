@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 interface StickyDemoReminderProps {
   demoStatus: 'idle' | 'active' | 'saved';
@@ -40,10 +41,12 @@ export default function StickyDemoReminder({
   // Derive content based on state
   let text = "";
   let buttonText = "";
+  let isLink = false;
   
   if (demoStatus === 'saved' && savedMs) {
     text = `You did it in ${(savedMs / 1000).toFixed(1)}s. Ready to start your free trial?`;
     buttonText = "Start free trial";
+    isLink = true;
   } else if (hasInteracted || demoStatus === 'active') {
     text = "You started — finish your invoice above. Press Ctrl+S to save.";
     buttonText = "Finish invoice ↑";
@@ -51,6 +54,8 @@ export default function StickyDemoReminder({
     text = "↑ Try the 9-second demo above — no signup needed.";
     buttonText = "Try it now";
   }
+
+  const commonClasses = "px-5 py-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-black uppercase tracking-widest rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] whitespace-nowrap flex items-center justify-center";
 
   return (
     <div 
@@ -69,12 +74,15 @@ export default function StickyDemoReminder({
             </p>
           </div>
 
-          <button
-            onClick={onTryItNow}
-            className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-black uppercase tracking-widest rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] whitespace-nowrap"
-          >
-            {buttonText}
-          </button>
+          {isLink ? (
+            <Link href="/signup" className={commonClasses}>
+              {buttonText}
+            </Link>
+          ) : (
+            <button onClick={onTryItNow} className={commonClasses}>
+              {buttonText}
+            </button>
+          )}
 
         </div>
       </div>

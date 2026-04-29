@@ -48,7 +48,7 @@ Last updated: 2026-04-30
 | P3-T3 | Analytics instrumentation | [x] COMPLETE |
 | P3-T4 | /switch-from-tally page | [x] COMPLETE |
 | P3-T5 | Mobile optimization | [x] COMPLETE |
-| P3-T6 | Performance audit | [ ] NOT STARTED |
+| P3-T6 | Performance audit | [x] COMPLETE |
 | P3-T7 | SEO basics | [ ] NOT STARTED |
 
 **Phase 3 Gate**: [ ] All tasks COMPLETE

@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import DemoInvoice, { DemoInvoiceRef } from '@/components/demo/DemoInvoice';
+import dynamic from 'next/dynamic';
+import DemoInvoiceSkeleton from '@/components/demo/DemoInvoiceSkeleton';
+
+const DemoInvoice = dynamic(() => import('@/components/demo/DemoInvoice'), {
+  loading: () => <DemoInvoiceSkeleton />,
+  ssr: false,
+});
+
+import { DemoInvoiceRef } from '@/components/demo/DemoInvoice';
 
 /**
  * TallyDemoSection

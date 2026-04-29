@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import DemoInvoice, { DemoInvoiceRef } from './DemoInvoice';
+import dynamic from 'next/dynamic';
+import DemoInvoiceSkeleton from './DemoInvoiceSkeleton';
+
+const DemoInvoice = dynamic(() => import('./DemoInvoice'), {
+  loading: () => <DemoInvoiceSkeleton />,
+  ssr: false,
+});
+
+import { DemoInvoiceRef } from './DemoInvoice';
 import DemoConversionBar from './DemoConversionBar';
 import StickyDemoReminder from '../ui/StickyDemoReminder';
 

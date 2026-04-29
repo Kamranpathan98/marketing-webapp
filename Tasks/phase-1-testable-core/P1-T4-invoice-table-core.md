@@ -1,7 +1,7 @@
 # P1-T4 — InvoiceTable Core
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: Nothing — build the shell first, wire state later
 
@@ -104,20 +104,20 @@ displayed = lineTotal + lineGST
 
 ## Acceptance Criteria
 
-- [ ] `types/invoice.ts` exists with InvoiceItem, InvoiceState, InvoiceAction fully typed, no `any`
-- [ ] `lib/gst.ts` exists with calcGST function, uses Math.floor (not Math.round)
-- [ ] useReducer is used (not multiple useState calls) in DemoInvoice
-- [ ] ADD_ITEM: adding same product twice increments qty (does not add duplicate row)
-- [ ] ADD_ITEM: adding different products creates separate rows
-- [ ] REMOVE_ITEM: row is removed from table
-- [ ] UPDATE_QTY to 0: row is removed
-- [ ] RESET: table clears completely, returns to empty state
-- [ ] IMEI field is visible for Smartphone category items
-- [ ] IMEI field is NOT visible for Accessories, Audio, TV category items
-- [ ] Qty input: changing value dispatches UPDATE_QTY immediately
-- [ ] Remove button: desktop — visible only on row hover; mobile — always visible
-- [ ] Line total = price × qty + GST (Math.floor for GST calculation)
-- [ ] Empty state shows correct text when no items
-- [ ] Undo safety net text appears when items.length ≥ 1
-- [ ] All inputs disabled after SAVE action
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] `types/invoice.ts` exists with InvoiceItem, InvoiceState, InvoiceAction fully typed, no `any`
+- [x] `lib/gst.ts` exists with calcGST function, uses Math.floor (not Math.round)
+- [x] useReducer is used (not multiple useState calls) in DemoInvoice
+- [x] ADD_ITEM: adding same product twice increments qty (does not add duplicate row)
+- [x] ADD_ITEM: adding different products creates separate rows
+- [x] REMOVE_ITEM: row is removed from table
+- [x] UPDATE_QTY to 0: row is removed
+- [x] RESET: table clears completely, returns to empty state
+- [x] IMEI field is visible for Smartphone category items
+- [x] IMEI field is NOT visible for Accessories, Audio, TV category items
+- [x] Qty input: changing value dispatches UPDATE_QTY immediately
+- [x] Remove button: desktop — visible only on row hover; mobile — always visible
+- [x] Line total = price × qty + GST (Math.floor for GST calculation)
+- [x] Empty state shows correct text when no items
+- [x] Undo safety net text appears when items.length ≥ 1
+- [x] All inputs disabled after SAVE action
+- [x] `npx tsc --noEmit` passes with 0 errors

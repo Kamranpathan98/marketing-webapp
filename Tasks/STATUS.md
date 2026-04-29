@@ -13,7 +13,7 @@ Last updated: 2026-04-30
 | Task | Title | Status |
 |------|-------|--------|
 | P1-T1 | Hero micro-animation | [x] COMPLETE |
-| P1-T2 | CustomerField + Walk-in skip | [ ] NOT STARTED |
+| P1-T2 | CustomerField + Walk-in skip | [x] COMPLETE |
 | P1-T3 | ProductSearch autocomplete | [ ] NOT STARTED |
 | P1-T4 | InvoiceTable core | [ ] NOT STARTED |
 | P1-T5 | SummaryPanel live totals | [ ] NOT STARTED |

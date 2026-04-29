@@ -1,7 +1,7 @@
 # P1-T2 — CustomerField with Walk-in Customer Skip
 
 **Phase**: 1 — Testable Core  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4 (DemoInvoice shell must exist for CustomerField to live in)
 
@@ -80,17 +80,17 @@ Internal state:
 
 ## Acceptance Criteria
 
-- [ ] Field is auto-focused when DemoInvoice mounts — cursor is blinking on page load without user clicking
-- [ ] Ghost text "Walk-in Customer" is visible before any interaction
-- [ ] Ghost text is visually distinct from a standard HTML placeholder (different class, different styling)
-- [ ] Instruction text "↵ Press Enter to use Walk-in Customer" is visible below the field on load
-- [ ] Pressing Enter on empty field: "Walk-in Customer" fills in, amber flash plays for ~100ms
-- [ ] Pressing Enter on empty field: focus moves immediately to Item Search field
-- [ ] Pressing Enter on empty field: instruction text fades out
-- [ ] Typing first character: instruction text fades out within 200ms
-- [ ] Pressing Enter on filled field: focus moves to Item Search field
-- [ ] Pressing Tab on field (empty or filled): same behavior as Enter
-- [ ] Timer starts on first keystroke in this field
-- [ ] Field is disabled after invoice is saved
-- [ ] No 'use client' warning — component is correctly marked 'use client'
-- [ ] Keyboard-only flow: user can go from page load to Item Search field without touching the mouse
+- [x] Field is auto-focused when DemoInvoice mounts — cursor is blinking on page load without user clicking
+- [x] Ghost text "Walk-in Customer" is visible before any interaction
+- [x] Ghost text is visually distinct from a standard HTML placeholder (different class, different styling)
+- [x] Instruction text "↵ Press Enter to use Walk-in Customer" is visible below the field on load
+- [x] Pressing Enter on empty field: "Walk-in Customer" fills in, amber flash plays for ~100ms
+- [x] Pressing Enter on empty field: focus moves immediately to Item Search field
+- [x] Pressing Enter on empty field: instruction text fades out
+- [x] Typing first character: instruction text fades out within 200ms
+- [x] Pressing Enter on filled field: focus moves to Item Search field
+- [x] Pressing Tab on field (empty or filled): same behavior as Enter
+- [x] Timer starts on first keystroke in this field
+- [x] Field is disabled after invoice is saved
+- [x] No 'use client' warning — component is correctly marked 'use client'
+- [x] Keyboard-only flow: user can go from page load to Item Search field without touching the mouse

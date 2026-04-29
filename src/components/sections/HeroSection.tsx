@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroMicroAnimation from '../hero/HeroMicroAnimation';
+import TrustBar from '../ui/TrustBar';
 import '../../styles/hero-animation.css';
 
 /**
@@ -46,10 +47,7 @@ export default function HeroSection() {
               </button>
             </div>
             
-            {/* Trust Line */}
-            <div className="pt-6 flex items-center justify-center lg:justify-start gap-6 opacity-40 grayscale contrast-125">
-              <div className="text-[10px] uppercase font-bold tracking-widest text-zinc-500">Used by 500+ Retailers in India</div>
-            </div>
+            {/* Trust Line replaced by TrustBar */}
           </div>
 
           {/* Right Side: Micro Animation */}
@@ -57,6 +55,10 @@ export default function HeroSection() {
             <HeroMicroAnimation />
           </div>
         </div>
+      </div>
+
+      <div className="mt-16 relative z-10">
+        <TrustBar />
       </div>
     </section>
   );

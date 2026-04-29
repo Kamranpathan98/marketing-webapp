@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import PainPointsSection from '@/components/tally/PainPointsSection';
 import WorkflowComparison from '@/components/tally/WorkflowComparison';
+import TestimonialSection from '@/components/sections/TestimonialSection';
 import TallyDemoSection from '@/components/tally/TallyDemoSection';
 import TallyMigrationSection from '@/components/sections/TallyMigrationSection';
 import TallyPricingSection from '@/components/tally/TallyPricingSection';
@@ -79,6 +80,8 @@ export default function SwitchFromTallyPage() {
           <WorkflowComparison />
         </div>
       </section>
+
+      <TestimonialSection />
 
       {/* Section 4 — Demo Embed */}
       <TallyDemoSection />

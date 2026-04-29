@@ -1,7 +1,7 @@
 # P2-T1 — SpeedComparison Section
 
 **Phase**: 2 — Conversion Infrastructure  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: Phase 1 complete (demo must exist to reference it)
 
@@ -56,16 +56,16 @@ SpeedBarsAnimator:
 
 ## Acceptance Criteria
 
-- [ ] Section heading is exactly: "Most Tally users take 2–3 minutes per invoice."
-- [ ] All 4 benchmark table rows are present with correct data
-- [ ] "Total: ~3 minutes vs 9 seconds on average." line is present
-- [ ] Two bars present: red (Tally) and amber (MyERP)
-- [ ] MyERP bar is visually ~5% the width of Tally bar when fully animated
-- [ ] Bars start at 0 width and animate to target widths on scroll trigger
-- [ ] Animation is CSS transition (not JS-driven width updates)
-- [ ] IntersectionObserver fires animation only once per page load
-- [ ] SpeedComparisonSection is a Server Component (no 'use client' directive on it)
-- [ ] SpeedBarsAnimator is the only Client Component in this section
-- [ ] Section is positioned above the inline demo section in homepage order
-- [ ] On mobile: table is readable (horizontal scroll or stacked layout)
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Section heading is exactly: "Most Tally users take 2–3 minutes per invoice."
+- [x] All 4 benchmark table rows are present with correct data
+- [x] "Total: ~3 minutes vs 9 seconds on average." line is present
+- [x] Two bars present: red (Tally) and amber (MyERP)
+- [x] MyERP bar is visually ~5% the width of Tally bar when fully animated
+- [x] Bars start at 0 width and animate to target widths on scroll trigger
+- [x] Animation is CSS transition (not JS-driven width updates)
+- [x] IntersectionObserver fires animation only once per page load
+- [x] SpeedComparisonSection is a Server Component (no 'use client' directive on it)
+- [x] SpeedBarsAnimator is the only Client Component in this section
+- [x] Section is positioned above the inline demo section in homepage order
+- [x] On mobile: table is readable (horizontal scroll or stacked layout)
+- [x] `npx tsc --noEmit` passes with 0 errors

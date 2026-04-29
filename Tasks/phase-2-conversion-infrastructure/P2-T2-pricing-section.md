@@ -1,7 +1,7 @@
 # P2-T2 — Pricing Section
 
 **Phase**: 2 — Conversion Infrastructure  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: Nothing in Phase 2 — can be built standalone
 
@@ -87,18 +87,18 @@ A4: "No setup fee. No onboarding fee. You pay only the monthly or annual subscri
 
 ## Acceptance Criteria
 
-- [ ] Toggle defaults to annual pricing on page load
-- [ ] Switching toggle updates all three card prices simultaneously
-- [ ] Starter monthly ₹799, annual ₹479 — correct on both toggle states
-- [ ] Growth monthly ₹1,799, annual ₹1,079 — correct on both toggle states
-- [ ] Professional monthly ₹2,999, annual ₹1,799 — correct on both toggle states
-- [ ] Growth card has amber glow border
-- [ ] Growth card shows "Best for shops switching from Tally" in amber italic 12px
-- [ ] Growth card shows ⚡ keyboard-first billing badge
-- [ ] Growth card shows "Most Popular" badge
-- [ ] Annual savings callout shown on Growth card when annual is selected
-- [ ] First feature in each plan list is prefixed with ⚡
-- [ ] FOUNDER2026 coupon code is displayed below cards
-- [ ] All 4 FAQ questions and answers are present (exact copy)
-- [ ] PricingToggle is the only Client Component in this section
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Toggle defaults to annual pricing on page load
+- [x] Switching toggle updates all three card prices simultaneously
+- [x] Starter monthly ₹799, annual ₹479 — correct on both toggle states
+- [x] Growth monthly ₹1,799, annual ₹1,079 — correct on both toggle states
+- [x] Professional monthly ₹2,999, annual ₹1,799 — correct on both toggle states
+- [x] Growth card has amber glow border
+- [x] Growth card shows "Best for shops switching from Tally" in amber italic 12px
+- [x] Growth card shows ⚡ keyboard-first billing badge
+- [x] Growth card shows "Most Popular" badge
+- [x] Annual savings callout shown on Growth card when annual is selected
+- [x] First feature in each plan list is prefixed with ⚡
+- [x] FOUNDER2026 coupon code is displayed below cards
+- [x] All 4 FAQ questions and answers are present (exact copy)
+- [x] PricingToggle is the only Client Component in this section
+- [x] `npx tsc --noEmit` passes with 0 errors

@@ -30,7 +30,7 @@ Last updated: 2026-04-30
 | Task | Title | Status |
 |------|-------|--------|
 | P2-T1 | SpeedComparison section | [x] COMPLETE |
-| P2-T2 | Pricing section | [ ] NOT STARTED |
+| P2-T2 | Pricing section | [x] COMPLETE |
 | P2-T3 | Tally Migration section | [ ] NOT STARTED |
 | P2-T4 | StickyDemoReminder | [ ] NOT STARTED |
 | P2-T5 | Signup flow | [ ] NOT STARTED |

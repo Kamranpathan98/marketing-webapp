@@ -94,3 +94,16 @@
 .animate-slide-up {
   animation: slideUp 300ms ease-out forwards;
 }
+
+/* Pricing Visibility Toggles */
+.pricing-annual, .pricing-monthly {
+  transition: opacity 0.2s ease-in-out;
+}
+
+[data-billing="annual"] .pricing-monthly {
+  display: none !important;
+}
+
+[data-billing="monthly"] .pricing-annual {
+  display: none !important;
+}

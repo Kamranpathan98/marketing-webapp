@@ -1,7 +1,7 @@
 # P3-T4 — /switch-from-tally Page
 
 **Phase**: 3 — Polish and Acquisition  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 1 day  
 **Depends on**: P1-T4 through P1-T7 (demo must work to embed it), P2-T2 (pricing card to embed)
 
@@ -98,26 +98,26 @@ H1: "Still using Tally for your electronics shop? There's a faster way." (exact 
 
 ## Files to Create
 
-- `app/switch-from-tally/page.tsx` — page with generateMetadata
-- `components/tally/WorkflowComparison.tsx` — Client Component (scroll animation)
+- [x] `app/switch-from-tally/page.tsx` — page with generateMetadata
+- [x] `components/tally/WorkflowComparison.tsx` — Client Component (scroll animation)
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Route /switch-from-tally exists and renders without errors
-- [ ] H1 text matches exactly: "Still using Tally for your electronics shop? There's a faster way."
-- [ ] All 5 pain points present in first-person voice (exact copy from spec)
-- [ ] Tally column shows exactly 13 steps (exact copy from spec)
-- [ ] MyERP column shows exactly 6 steps (exact copy from spec)
-- [ ] Workflow comparison animates in on scroll (staggered, 60ms per step)
-- [ ] DemoInvoice is embedded on this page and fully functional
-- [ ] Demo benchmark text on this page says "Your personal best on this page" (not homepage text)
-- [ ] TallyMigrationSection component is reused (not duplicated)
-- [ ] Only the Growth pricing card is shown (not all 3)
-- [ ] FOUNDER2026 coupon code is displayed below Growth card
-- [ ] "Book a free migration call" CTA is present with link to #calendly
-- [ ] Page title tag: "Switch from Tally to MyERP — Invoice 6x Faster | MyERP"
-- [ ] Meta description matches spec exactly
-- [ ] og:title and og:description are set
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Route /switch-from-tally exists and renders without errors
+- [x] H1 text matches exactly: "Still using Tally for your electronics shop? There's a faster way."
+- [x] All 5 pain points present in first-person voice (exact copy from spec)
+- [x] Tally column shows exactly 13 steps (exact copy from spec)
+- [x] MyERP column shows exactly 6 steps (exact copy from spec)
+- [x] Workflow comparison animates in on scroll (staggered, 60ms per step)
+- [x] DemoInvoice is embedded on this page and fully functional
+- [x] Demo benchmark text on this page says "Your personal best on this page" (not homepage text)
+- [x] TallyMigrationSection component is reused (not duplicated)
+- [x] Only the Growth pricing card is shown (not all 3)
+- [x] FOUNDER2026 coupon code is displayed below Growth card
+- [x] "Book a free migration call" CTA is present with link to #calendly
+- [x] Page title tag: "Switch from Tally to MyERP — Invoice 6x Faster | MyERP"
+- [x] Meta description matches spec exactly
+- [x] og:title and og:description are set
+- [x] `npx tsc --noEmit` passes with 0 errors

@@ -109,6 +109,7 @@ interface DemoInvoiceProps {
   onSave?: (elapsedMs: number) => void;
   onReset?: () => void;
   onStateChange?: (status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => void;
+  benchmarkLabel?: string;
 }
 
 import { track } from '@/lib/analytics';
@@ -120,7 +121,8 @@ export interface DemoInvoiceRef {
 const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({ 
   onSave, 
   onReset, 
-  onStateChange 
+  onStateChange,
+  benchmarkLabel = 'Average: 9 sec'
 }, ref) => {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
@@ -258,8 +260,10 @@ const DemoInvoice = React.forwardRef<DemoInvoiceRef, DemoInvoiceProps>(({
           <div className="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-bold uppercase tracking-wider">
             Live Demo
           </div>
-          <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest">
-            New Invoice #{state.startTime ? (state.startTime % 10000).toString().padStart(4, '0') : '8843'}
+          <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest flex items-center gap-2">
+            <span>New Invoice #{state.startTime ? (state.startTime % 10000).toString().padStart(4, '0') : '8843'}</span>
+            <span className="w-1 h-1 rounded-full bg-zinc-800"></span>
+            <span className="text-zinc-600 font-bold">{benchmarkLabel}</span>
           </span>
         </div>
         <InvoiceTimer 

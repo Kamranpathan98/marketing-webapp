@@ -1,7 +1,7 @@
 # P2-T4 — StickyDemoReminder
 
 **Phase**: 2 — Conversion Infrastructure  
-**Status**: [ ] NOT STARTED  
+**Status**: [x] COMPLETE  
 **Estimated effort**: 0.5 day  
 **Depends on**: P1-T4 (needs DemoInvoice state to know demo completion status)
 
@@ -79,16 +79,16 @@ StickyDemoReminder receives props:
 
 ## Acceptance Criteria
 
-- [ ] Component is never rendered on viewport < 768px
-- [ ] Component is not visible when demo section is in viewport
-- [ ] Component fades in when user scrolls past demo section
-- [ ] Component fades out when user scrolls back to demo section
-- [ ] State 1 text shown when hasInteracted === false: "↑ Try the 9-second demo above — no signup needed."
-- [ ] State 2 text shown when status === 'active': "You started — finish your invoice above. Press F2 to save."
-- [ ] State 3 text shown when status === 'saved': includes actual elapsed time in X.Xs format
-- [ ] "Try it now" button scrolls to demo and bypasses velocity check for auto-focus
-- [ ] "Finish invoice ↑" button scrolls to demo section
-- [ ] Fade-in animation uses CSS transform + opacity only
-- [ ] Component does not manage its own demo state — all state received as props
-- [ ] IntersectionObserver cleans up on component unmount
-- [ ] `npx tsc --noEmit` passes with 0 errors
+- [x] Component is never rendered on viewport < 768px
+- [x] Component is not visible when demo section is in viewport
+- [x] Component fades in when user scrolls past demo section
+- [x] Component fades out when user scrolls back to demo section
+- [x] State 1 text shown when hasInteracted === false: "↑ Try the 9-second demo above — no signup needed."
+- [x] State 2 text shown when status === 'active': "You started — finish your invoice above. Press F2 to save."
+- [x] State 3 text shown when status === 'saved': includes actual elapsed time in X.Xs format
+- [x] "Try it now" button scrolls to demo and bypasses velocity check for auto-focus
+- [x] "Finish invoice ↑" button scrolls to demo section
+- [x] Fade-in animation uses CSS transform + opacity only
+- [x] Component does not manage its own demo state — all state received as props
+- [x] IntersectionObserver cleans up on component unmount
+- [x] `npx tsc --noEmit` passes with 0 errors

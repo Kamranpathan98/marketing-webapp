@@ -108,12 +108,20 @@ function invoiceReducer(state: InvoiceState, action: InvoiceAction): InvoiceStat
 interface DemoInvoiceProps {
   onSave?: (elapsedMs: number) => void;
   onReset?: () => void;
+  onStateChange?: (status: 'idle' | 'active' | 'saved', hasInteracted: boolean) => void;
 }
 
-export default function DemoInvoice({ onSave, onReset }: DemoInvoiceProps) {
+export default function DemoInvoice({ onSave, onReset, onStateChange }: DemoInvoiceProps) {
   const [state, dispatch] = useReducer(invoiceReducer, initialState);
   const [focusedField, setFocusedField] = React.useState<string>('customer');
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync state to parent
+  React.useEffect(() => {
+    if (onStateChange) {
+      onStateChange(state.status, state.hasInteracted);
+    }
+  }, [state.status, state.hasInteracted, onStateChange]);
 
   const { elapsedMs, justStarted } = useInvoiceTimer({ 
     status: state.status, 

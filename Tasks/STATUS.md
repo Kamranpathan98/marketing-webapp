@@ -1,6 +1,12 @@
 # MyERP Marketing Website — Task Status
 
-Last updated: [DATE]
+Last updated: 2026-04-29
+
+## Setup
+
+| Task | Title | Status |
+|------|-------|--------|
+| SETUP | Project Scaffold & Config | [x] COMPLETE |
 
 ## Phase 1 — Testable Core
 

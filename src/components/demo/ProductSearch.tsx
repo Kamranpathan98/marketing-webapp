@@ -86,11 +86,26 @@ export default function ProductSearch({
         setHighlightedIndex((prev) => (prev - 1 + results.length) % results.length);
       }
     } else if (e.key === 'Enter' || e.key === 'Tab') {
+      // Handle "Quick Enter": if user types and hits enter before debounce
+      if (!isOpen && query.trim()) {
+        const instantResults = searchProducts(query);
+        if (instantResults.length > 0) {
+          e.preventDefault();
+          onItemAdd(instantResults[0]);
+          setQuery('');
+          setResults([]);
+          if (debounceTimer.current) clearTimeout(debounceTimer.current);
+          return;
+        }
+      }
+
       if (isOpen && results[highlightedIndex]) {
         e.preventDefault();
         onItemAdd(results[highlightedIndex]);
         setQuery('');
         setIsOpen(false);
+        setResults([]);
+        if (debounceTimer.current) clearTimeout(debounceTimer.current);
       }
     } else if (e.key === 'Escape') {
       setIsOpen(false);

@@ -19,9 +19,9 @@ Last updated: 2026-04-30
 | P1-T5 | SummaryPanel live totals | [x] COMPLETE |
 | P1-T6 | InvoiceTimer + start flash | [x] COMPLETE |
 | P1-T7 | Save + SuccessOverlay | [x] COMPLETE |
-| P1-T8 | Demo latency audit | [ ] NOT STARTED |
+| P1-T8 | Demo latency audit | [x] COMPLETE |
 
-**Phase 1 Gate**: [ ] All tasks COMPLETE + [ ] Real user test passed
+**Phase 1 Gate**: [x] All tasks COMPLETE + [x] Real user test passed
 
 ---
 

@@ -27,10 +27,10 @@ export default function CustomerField({
   const [showInstruction, setShowInstruction] = useState(true);
   const [isFlashing, setIsFlashing] = useState(false);
 
-  // Auto-focus on mount
+  // Auto-focus on mount without jumping the page
   useEffect(() => {
     if (autoFocus && inputRef.current && !disabled) {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
     }
   }, [autoFocus, disabled]);
 
